@@ -1,0 +1,25 @@
+---
+fr:
+  catalogs:
+    show:
+      viat-search-btn: 'Rechercher'
+      viat-standard-search-placeholder: 'Exemple: voyageurs montagnes'
+  shared:
+    footer:
+      viat_admin: 'Admin'
+    user_menu:
+      viat_my_album: 'Mon album'
+      viat_my_images: 'Mes images'
+    search:
+      standard_search:
+        viat-search-standard: 'Recherche standard'
+      geo_search:
+        viat-search-geo: 'Recherche géographique'
+      advanced_search:
+        viat-search-advanced: 'Recherche avancée'
+  simple_search:
+    index:
+      viat-search-results-message_html: "<b>%{count_delimited}</b> images contenant <b>\"%{query}\"</b>"
+  items:
+      item_list_nav:
+        back: "Retour à la page de résultats"

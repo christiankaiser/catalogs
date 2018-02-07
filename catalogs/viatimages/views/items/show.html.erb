@@ -1,0 +1,40 @@
+<% provide(:title, item_display_name(@item)) %>
+
+<% content_for :top_content do %>
+  <div class="top-content-type-item">
+    <%= render("shared/searchlinks") %>
+    <div class="items-nav"><%= render_item_list_nav(item_list, @item) if item_list %></div>
+  </div>
+<% end %>
+
+<div id="main-content">
+  <div id="main-wrapper">
+    <div id="main">
+      <table class="table item-table">
+        <tbody>
+        <% @item.applicable_fields.each do |field| %>
+          <tr>
+            <th><%= field.label %></th>
+            <td class="<%= field.type %>"><%= field_value(@item, field) %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+      <% fields_and_item_references(@item) do |field, browse| %>
+        <h3><%= field.item_type.name_plural %></h3>
+        <%= render_item_list(browse) %>
+        <% if browse.more? %>
+          <%= link_to(items_path(
+                          :item_type_slug => browse.item_type,
+                          browse.field.slug => browse.value
+                      )) do %>
+            <%# TODO: i18n %>
+            View more
+            (<%= pluralize(browse.total_count, "item") %>)
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+#footer-wrapper {
+  height: 135px;
+  background-color: #e6e6e6;
+  margin-bottom: 15px;
+}
+
+#logo-banner {
+  margin-left: 30px;
+  margin-right: 30px;
+  border-bottom: 1px solid #b3b3b3;
+}
+
+#logos-biblios {
+  display: inline;
+  margin-left: 35px;
+}
+
+#logos-biblios img {
+  margin: 0 0 15px 0;
+  margin-left: 15px;
+  vertical-align: bottom !important;
+}
+
+#logos-biblios a, a:hover {
+  text-decoration: none;
+}
+
+#footer {
+  margin-top: 12px;
+  text-align: center;
+}
+
+#footer a {
+  text-decoration: none;
+  color: #000;
+  padding-left: 14px;
+  padding-right: 14px;
+}
+
+#footer a:hover {
+  text-decoration: underline;
+}
+
+#footer .dropdown {
+  display: inline;
+}
+
+#footer li.inline {
+  display: inline;
+}

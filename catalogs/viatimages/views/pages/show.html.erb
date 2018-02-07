@@ -1,0 +1,13 @@
+<% content_for :top_content do %>
+  <div class="top-content-type-generic">
+    <%= render("shared/searchlinks") %>
+  </div>
+<% end %>
+
+<div id="main-content">
+  <div id="main-wrapper">
+    <div id="main">
+      <%= render partial:'content', locals: {page: @page} %>
+    </div>
+  </div>
+</div>

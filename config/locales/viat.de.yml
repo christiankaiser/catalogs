@@ -1,0 +1,25 @@
+---
+de:
+  catalogs:
+    show:
+      viat-search-btn: 'Suchen'
+      viat-standard-search-placeholder: 'Beispiel: Reisende Berge'
+  shared:
+    footer:
+      viat_admin: 'Admin'
+    user_menu:
+      viat_my_album: 'Mein album'
+      viat_my_images: 'Meine Bilder'
+    search:
+      standard_search:
+        viat-search-standard: 'Standard-Suche'
+      geo_search:
+        viat-search-geo: 'Geo-Suche'
+      advanced_search:
+        viat-search-advanced: 'Erweiterte Suche'
+  simple_search:
+    index:
+      viat-search-results-message_html: "<b>%{count_delimited}</b> Bilder mit <b>\"%{query}\"</b>"
+  items:
+      item_list_nav:
+        back: "Zurück zu den Suchergebnissen"

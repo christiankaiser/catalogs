@@ -1,0 +1,20 @@
+<% content_for :title do %>
+  <title>Viatimages</title>
+<% end %>
+
+<% content_for :head do -%>
+  <%= stylesheet_link_tag("viatimages", :media => "all") %>
+<% end -%>
+
+<div id="wrapper">
+  <div id="top-content">
+    <%= render("shared/menu") %>
+    <%= yield :top_content %>
+  </div>
+
+  <%= yield %>
+
+  <%= render("shared/footer") %>
+</div>
+
+<% parent_layout "base" %>

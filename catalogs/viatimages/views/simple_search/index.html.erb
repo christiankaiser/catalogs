@@ -1,0 +1,34 @@
+<% content_for :title do %>
+  <%= t(".viat-search-results-message_html",
+        :query => @search.query,
+        :count_delimited => number_with_delimiter(@search.total_count)) %>
+<% end %>
+
+<% content_for :top_content do %>
+  <div class="top-content-type-generic">
+    <%= render("shared/searchlinks") %>
+  </div>
+<% end %>
+
+<div id="main-content">
+  <div id="main-wrapper">
+    <div id="main">
+      <div class="searchmsg">
+        <% if @search.query.empty? %>
+          No search criteria has been entered
+        <% else %>
+          <%= t(".viat-search-results-message_html",
+                :query => @search.query,
+                :count_delimited => number_with_delimiter(@search.total_count)) %>
+        <% end %>
+      </div>
+
+      <div class="images-wrapper">
+        <div class="images">
+          <%= render_item_list(@search) %>
+          <%= paginate(@search.items) %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

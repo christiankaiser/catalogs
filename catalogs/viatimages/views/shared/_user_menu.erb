@@ -1,0 +1,9 @@
+<% if current_user.authenticated? %>
+  <%= link_to(
+          t(".viat_my_images"),
+          edit_user_registration_path(:locale => I18n.locale)) %>
+<% else %>
+  <%= link_to(
+        t(".viat_my_album"),
+        new_user_session_path(:locale => I18n.locale)) %>
+<% end %>
