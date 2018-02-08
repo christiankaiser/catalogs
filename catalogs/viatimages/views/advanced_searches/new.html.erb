@@ -1,0 +1,57 @@
+<% provide(:title, t(".title")) %>
+
+<% content_for :top_content do %>
+  <div class="top-content-type-generic">
+    <%= render("shared/searchlinks") %>
+  </div>
+<% end %>
+
+<div id="main-content">
+  <div id="main-wrapper">
+    <div id="main">
+      <div class="ui-tabs">
+        <% if @advanced_search.item_types.many? %>
+          <ul class="nav nav-tabs">
+            <% @advanced_search.item_types.each do |type| %>
+              <% if type.slug == 'corpus' || type.slug == 'images' %>
+              <%= content_tag(
+                      :li,
+                      :role => "presentation",
+                      :class => ("active" if @advanced_search.item_type == type)) do %>
+                <%= link_to(t(".tab", :type => type.name), :type => type.slug) %>
+              <% end %>
+              <% end %>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+
+      <%= bootstrap_form_for(@advanced_search) do |f| %>
+        <%= hidden_field_tag(:type, params[:type]) %>
+
+        <table class="table">
+          <tbody>
+          <% @advanced_search.fields.each do |field| %>
+            <%= render_advanced_search_field(f, field) do |content| %>
+              <tr>
+                <th><%= field.name %></th>
+                <td><%= content %></td>
+              </tr>
+            <% end %>
+          <% end %>
+          </tbody>
+        </table>
+
+        <div class="ui-btns">
+          <div class="nav-btns">
+            <%= f.primary(t(".submit")) %>
+            <%= link_to(
+                    t(".start_over"),
+                    { :type => params[:type] },
+                    :class => "btn btn-text") %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

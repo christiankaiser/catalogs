@@ -19,4 +19,6 @@
   <% end %>
 </span>
 
-<div class="nav-center">Recherche pour: "<%= params[:q] %>"</div>
+<% if !params[:q].blank? %>
+  <div class="nav-center">Recherche pour: "<%= params[:q] %>"</div>
+<% end %>

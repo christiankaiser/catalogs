@@ -20,6 +20,11 @@ fr:
   simple_search:
     index:
       viat-search-results-message_html: "<b>%{count_delimited}</b> images contenant <b>\"%{query}\"</b>"
+      viat-no-search-criteria: "Aucun critère de recherche n'a été entré"
+  advanced_searches:
+      show:
+        viat-no-results: "Aucun résultat pour l'instant"
+        viat-search-results-message_html: "<b>%{count_delimited}</b> images"
   items:
       item_list_nav:
         back: "Retour à la page de résultats"

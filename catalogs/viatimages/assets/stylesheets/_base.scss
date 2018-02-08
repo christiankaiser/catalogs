@@ -47,3 +47,22 @@ form > .form-group {
   margin-left: auto;
   margin-right: auto;
 }
+
+input.btn,
+a.btn {
+  height: 31px;
+  background-color: #FF0000;
+  border: 1px solid #FF0000;
+  color: #fff;
+  font-size: 13px;
+  border-radius: 0px;
+}
+
+input.btn:hover,
+a.btn:hover,
+input.btn:focus,
+a.btn:focus {
+  background-color: #CC0000;
+  border: 1px solid #CC0000;
+  color: #fff;
+}
