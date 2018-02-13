@@ -1,7 +1,5 @@
-# Viatimages for Catima
+# Custom catalogs for Catima
 
-Specific files for the customization of Catima's [Viatimages](https://www2.unil.ch/viatimages/) catalog.
+All catalog-specific files are available in this repository.
 
 Documentation about catalog overrides can be found [here](https://github.com/catima/devdoc/tree/master/catalog-overrides).
-
-[Work in progress]
