@@ -25,6 +25,30 @@
         <%= render("shared/search/geo_search") %>
         <%= render("shared/search/advanced_search") %>
       </div>
+
+      <div id="searchdomain">
+        <span><%= t(".viat-by-domain") %></span>
+        <div id="searchdomain-dropdown">
+          <select id="sel_domain_court" name="sel_domain_court">
+            <option value="" selected="selected"><%= t(".viat-select-domain") %></option>
+            <% @domain_choice_set_items.each_with_index do | domain, index | %>
+              <option value="<%= index %>"><%= domain.short_name %></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
+
+      <div id="searchcorpus">
+        <span><%= t(".viat-by-corpus") %></span>
+        <div id="searchcorpus-dropdown">
+          <select id="sel_corpus" name="sel_corpus">
+            <option value="" selected="selected"><%= t(".viat-select-corpus") %></option>
+            <% @corpus_type_items.each do | corpus | %>
+              <option value="<%= corpus.get_value('id-corpus') %>"><%= corpus.get_value('title').truncate(70) %></option>
+            <% end %>
+          </select>
+        </div>
+      </div>
     </div>
   </div>
 <% end %>

@@ -66,3 +66,27 @@ a.btn:focus {
   border: 1px solid #CC0000;
   color: #fff;
 }
+
+select {
+  height: 29px;
+  background-color: #ccc;
+  border: 1px solid #ccc;
+  background-image: image-url(dropdown-bg-arrow);
+  background-repeat: no-repeat;
+  background-position: right;
+  line-height: 26px;
+  padding: 1px 7px;
+  overflow: hidden;
+  -webkit-appearance: button;
+  -webkit-border-radius: 0px;
+  color: black;
+  font-size: 13px;
+}
+
+option {
+  font-weight: normal;
+  display: block;
+  white-space: pre;
+  min-height: 1.2em;
+  padding: 0px 2px 1px;
+}

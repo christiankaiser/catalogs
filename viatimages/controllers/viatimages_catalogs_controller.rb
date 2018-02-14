@@ -1,12 +1,13 @@
 class ViatimagesCatalogsController < CatalogsController
   def show
-    @corpus_type_id = ItemType.where(catalog_id: @catalog.id).where(slug: 'corpus').ids
-    @corpus_type_items = Item.where(item_type_id: @corpus_type_id.first)
+    @corpus_type = ItemType.where(catalog_id: @catalog.id).where(slug: 'corpus')
+    @corpus_title_field = @corpus_type.first.find_field('title')
+    @corpus_type_items = Item.where(item_type_id: @corpus_type.ids.first).sorted_by_field(@corpus_title_field)
 
-    @domaines_choice_set_id = ChoiceSet.where(catalog_id: @catalog.id).where(name: 'Domaines').ids
-    @domaines_choice_set_items = Choice.where(choice_set_id: @domaines_choice_set_id.first)
+    @domain_choice_set = ChoiceSet.where(catalog_id: @catalog.id).where(name: 'Domaines')
+    @domain_choice_set_items = Choice.where(choice_set_id: @domain_choice_set.ids.first).sorted
 
-    @keywords_type_id = ItemType.where(catalog_id: @catalog.id).where(slug: 'keywords').ids
-    @keywords_type_items = Item.where(item_type_id: @keywords_type_id.first)
+    @keyword_type = ItemType.where(catalog_id: @catalog.id).where(slug: 'keywords')
+    @keyword_type_items = Item.where(item_type_id: @keyword_type.ids.first)
   end
 end

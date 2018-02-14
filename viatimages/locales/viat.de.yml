@@ -4,6 +4,10 @@ de:
     show:
       viat-search-btn: 'Suchen'
       viat-standard-search-placeholder: 'Beispiel: Reisende Berge'
+      viat-select-domain: 'Bereich auswählen'
+      viat-select-corpus: 'Korpus auswählen'
+      viat-by-domain: '...oder nach Bereich'
+      viat-by-corpus: '...oder nach Korpus'
   shared:
     footer:
       viat_admin: 'Admin'

@@ -43,3 +43,26 @@
 #searchbox input.txtSearch:hover {
   border-color: #aa0000;
 }
+
+#sel_domain_court, #sel_corpus {
+  width: 460px;
+}
+
+#searchdomain {
+  position: absolute;
+  top: 123px;
+  font-size: 16px;
+  color: #fff;
+}
+
+#searchcorpus {
+  position: absolute;
+  top: 212px;
+  font-size: 16px;
+  color: #fff;
+}
+
+#searchdomain #searchdomain-dropdown,
+#searchcorpus #searchcorpus-dropdown {
+  margin-top: 10px;
+}

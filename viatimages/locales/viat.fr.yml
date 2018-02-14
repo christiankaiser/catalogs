@@ -4,6 +4,10 @@ fr:
     show:
       viat-search-btn: 'Rechercher'
       viat-standard-search-placeholder: 'Exemple: voyageurs montagnes'
+      viat-select-domain: 'Sélectionner un domaine'
+      viat-select-corpus: 'Sélectionner un corpus'
+      viat-by-domain: '...ou par domaine'
+      viat-by-corpus: '...ou par corpus'
   shared:
     footer:
       viat_admin: 'Admin'
