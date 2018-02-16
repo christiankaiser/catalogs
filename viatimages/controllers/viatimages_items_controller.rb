@@ -19,6 +19,7 @@ class ViatimagesItemsController < ItemsController
         @tome_volume = field if field.slug == "tome-volume"
         @langue_ouvrage = field if field.slug == "langue-ouvrage"
         @collection_ouvrage = field if field.slug == "collection-ouvrage"
+        @autre_editions = field if field.slug == "autres-editions"
       end
       @etablissement = @item.get_value('etablissement')
     end

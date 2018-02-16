@@ -36,3 +36,14 @@ fr:
       type:
         corpus:
           viat-catalog-record: "Fiche catalogue bibliothèque"
+          viat-publisher: "Editeur"
+          viat-publishing-date: "Date d'édition"
+          viat-publication-place: "Lieu(x) d'édition"
+          viat-online-book-collection: "Livre ou collection en ligne"
+          viat-description: "Description"
+          viat-comments: "Remarques"
+          viat-book-collection: "Collection de l'ouvrage"
+          viat-book-language: "Langue de l'ouvrage"
+          viat-other-editions: "Autres éditions"
+          viat-title-images: "%{images_count} images pour l'ouvrage: «%{corpus_title}»"
+          viat-view-more: "Voir plus"

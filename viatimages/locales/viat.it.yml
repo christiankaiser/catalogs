@@ -36,3 +36,14 @@ it:
       type:
         corpus:
           viat-catalog-record: "Scheda catalogo biblioteca"
+          viat-publisher: "Editore"
+          viat-publishing-date: "Data d'edizione"
+          viat-publication-place: "Luoghi d'edizione"
+          viat-online-book-collection: "Libro o collezione online"
+          viat-description: "Descrizione"
+          viat-comments: "Commenti"
+          viat-book-collection: "Raccolta del libro"
+          viat-book-language: "Lingua del libro"
+          viat-other-editions: "Altre edizioni"
+          viat-title-images: "%{images_count} immagini per il libro: «%{corpus_title}»"
+          viat-view-more: "Vedi di più"
