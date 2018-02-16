@@ -66,3 +66,50 @@
 #searchcorpus #searchcorpus-dropdown {
   margin-top: 10px;
 }
+
+#tagcloud {
+  position: absolute;
+  top: 330px;
+  width: 450px;
+  text-align: center;
+  overflow: hidden;
+}
+
+#tagcloud .tag a,
+#tagcloud .tag a:hover,
+#tagcloud .tag a:focus {
+  color: #fff;
+  text-decoration: none;
+}
+
+#tagcloud span {
+  margin: 0 10px 0 10px;
+}
+
+#tagcloud .largest {
+  font-size: 22px;
+}
+
+#tagcloud .large {
+  font-size: 19px;
+}
+
+#tagcloud .medium {
+  font-size: 16px;
+}
+
+#tagcloud .small {
+  font-size: 13px;
+}
+
+
+
+
+
+
+
+
+
+
+
+

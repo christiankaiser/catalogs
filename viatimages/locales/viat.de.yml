@@ -32,3 +32,7 @@ de:
   items:
       item_list_nav:
         back: "Zurück zu den Suchergebnissen"
+        viat-images: "Bild %{current} von %{total}"
+      type:
+        corpus:
+          viat-catalog-record: "Bibliothekskatalogeintrag"

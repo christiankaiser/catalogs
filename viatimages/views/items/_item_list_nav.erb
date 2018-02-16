@@ -1,7 +1,9 @@
-<span class="nav-left"><%= link_to(
-        fa_icon(:"chevron-circle-left", :text => t(".back")),
-        item_list_path
-        ) %></span>
+<span class="nav-left">
+  <%= link_to(
+          fa_icon(:"chevron-circle-left", :text => t(".back")),
+          item_list_path
+      ) %>
+</span>
 
 <span class="nav-right">
   <% if nav.previous %>
@@ -9,13 +11,13 @@
       <%= fa_icon(:"chevron-left") %>
     <% end %>
   <% end %>
-  Image <%= nav.offset %> de <%= nav.results.total_count %>
+  <%= t(".viat-images",
+        :current => nav.offset,
+        :total => number_with_delimiter(nav.results.total_count)) %>
   <% if nav.next %>
     <%= item_list_link(item_list, nav.next, nav.offset+1) do %>
       <%= fa_icon(:"chevron-right") %>
     <% end %>
-  <% elsif nav.previous %>
-    <%= t(".no_more") %>
   <% end %>
 </span>
 

@@ -1,0 +1,56 @@
+<div id="ouvrage">
+  <h2 class="titreDetail"><%= @item.get_value('title') %></h2>
+
+  <h4><%= @item.get_value('title-long') %></h4>
+
+  <p id="corpus-persos">
+    Personnes associées ?
+  </p>
+
+  <div id="corpus-details">
+    <p class="corpusInfo">
+      <span>Editeur:</span> ?<br>
+      <span>Date d'édition:</span> <%= @item.get_value('date-edition')['Y'] %><br>
+      <span>Lieu(x) d'édition:</span> <%= field_value(@item, @lieu_edition) %>
+    </p>
+
+    <p class="corpusInfo">
+      <span>Livre ou collection en ligne:&nbsp;</span> ?
+    </p>
+
+    <p class="corpusInfo">
+      <span>Description:</span><br>
+      ? - <%= field_value(@item, @tome_volume) %> Tome(s)&nbsp;/&nbsp;Volume(s), <%= @item.get_value('nbre-illustrations') %> illustration(s)<br>
+      <a href="<%= @etablissement.get_value('web') %>" target="_blank"><%= @etablissement.item_type.find_field('name').raw_value(@etablissement) %></a> - <%= @item.item_type.find_field('cote').label %>: <%= @item.get_value('cote') %> - <a href="<%=  @item.get_value('url-catalogue') %>" target="_blank" title="<%= t(".viat-catalog-record") %>"><%= t(".viat-catalog-record") %></a>
+    </p>
+
+    <p class="corpusInfo">
+      <span>Remarques:</span><br><%= @item.get_value('comment') %>
+    </p>
+
+    <p class="corpusInfo">
+      <span>Collection de l'ouvrage:</span> <%= @collection_ouvrage.raw_value(@item) %><br>
+      <span>Langue de l'ouvrage:</span> <%= @langue_ouvrage.selected_choice(@item).short_name if @langue_ouvrage.selected_choice(@item).present? %><br>
+    </p>
+  </div>
+
+  <span class="searchmsg">
+      <% fields_and_item_references(@item) do |field, browse| %>
+        <%= browse.total_count %>
+      <% end %>
+      images pour l'ouvrage: <i>«<%= @item.get_value('title') %>»</i>
+  </span>
+</div>
+
+<% fields_and_item_references(@item) do |field, browse| %>
+  <%= render_item_list(browse) %>
+  <% if browse.more? %>
+    <%= link_to(items_path(
+                    :item_type_slug => browse.item_type,
+                    browse.field.slug => browse.value
+                )) do %>
+      <%# TODO: i18n %>
+      View more
+    <% end %>
+  <% end %>
+<% end %>
