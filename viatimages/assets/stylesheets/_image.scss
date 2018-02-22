@@ -1,0 +1,86 @@
+#image-item-top-content td {
+  vertical-align: top;
+}
+
+div[id^="ImageViewer-react-component-"] {
+  margin-top: -40px;
+  margin-left: 30px;
+}
+.img-enlarge {
+  display: none;
+}
+#image-column{
+  width: 453px;
+  padding-right: 30px;
+  text-align: center;
+}
+#description-column {
+  width: 453px;
+  padding-left: 25px;
+}
+#description-wrapper {
+  text-align: left;
+}
+#description-titre {
+  margin-bottom: 40px;
+}
+#titreDetail, #titreDetailTrad {
+  font-size: 21px;
+}
+#titreDetailTrad {
+  display: none;
+}
+#titreLabel {
+  color: #ff0000;
+  margin-bottom: 5px;
+}
+#titreLabel span {
+  color: #dddddd;
+}
+#titreLabel a.inactive {
+  color: #ff0000;
+  text-decoration: none;
+}
+#titreLabel a.active {
+  color: #8a1c20;
+  text-decoration: none;
+  cursor: default;
+}
+#titreLabel a {
+  text-decoration: none;
+}
+#info-wrapper {
+  margin-top: 150px;
+  text-align: left;
+  width: 100%;
+}
+#info-content span {
+  color: #73746a;
+}
+.imageViewer {
+  width: 350px;
+}
+#details_top .info {
+  margin-top: 15px;
+}
+#details_top .info span {
+  color: #73746a;
+}
+#caracteristiques, #remarques {
+  overflow: hidden;
+  display: none;
+}
+#caracteristiques table {
+  width: 100%
+}
+#caracteristiques table td {
+  width: 50%;
+  padding-right: 5px;
+}
+.info-toggle-img {
+  margin-top: -4px;
+  margin-left: 3px;
+}
+#caracteristiquesLabel:focus, #remarquesLabel:focus {
+  text-decoration: none;
+}

@@ -1,25 +1,113 @@
-<table class="table item-table">
+<table id="image-item-top-content">
   <tbody>
-  <% @item.applicable_fields.each do |field| %>
-    <tr>
-      <th><%= field.label %></th>
-      <td class="<%= field.type %>"><%= field_value(@item, field) %></td>
-    </tr>
-  <% end %>
+  <tr>
+    <td id="image-column">
+      <div>
+        <%= field_value(@item, @image) %>
+
+        <div id="info-wrapper">
+          <hr>
+          <p id="info-content"><span>URL permanente:</span> https://purl.org/viatimages/fr/image/<%= @item.get_value('image-id') %></p>
+        </div>
+      </div>
+    </td>
+    <td id="description-column">
+      <div id="description-wrapper">
+        <div id="description-titre">
+          <% if strip_tags(field_value(@item, @titre)).present? %>
+            <p id="titreLabel">
+              <a id="titreDetailLabel" class="active" href="#">Titre original</a><span> | </span><a id="titreDetailTradLabel" class="inactive" href="#">Traduction</a>
+            </p>
+          <% end %>
+          <span id="titreDetail">«<%= field_value(@item, @titre_orig) %>»</span>
+          <span id="titreDetailTrad">«<%= field_value(@item, @titre) %>»</span>
+        </div>
+
+        <div id="details_top">
+          <% if strip_tags(field_value(@item, @illustrateurs)).present? %>
+            <p class="info"><span>Illustrateurs</span><br>
+              <%= field_value(@item, @illustrateurs) %>
+            </p>
+          <% end %>
+
+          <% if strip_tags(field_value(@item, @corpus)).present? %>
+            <p class="info"><span>Ouvrage source</span><br>
+              <%= field_value(@item, @corpus) %>
+            </p>
+          <% end %>
+
+          <% if strip_tags(field_value(@item.get_value('corpus'), @item.get_value('corpus').item_type.find_field('etablissement'))).present? %>
+            <p class="info">
+              <%= field_value(@item.get_value('corpus'), @item.get_value('corpus').item_type.find_field('etablissement')) %>
+            </p>
+          <% end %>
+
+          <% if strip_tags(field_value(@item, @description)).present? %>
+            <p class="info"><span>Description</span><br>
+              <%= field_value(@item, @description) %>
+            </p>
+          <% end %>
+
+          <p class="info">
+            <a id="caracteristiquesLabel" href="#">
+              <span>Caractéristiques</span><%= image_tag("arrow-expand.gif", :id => "arrowCaracteristiques", :class => "info-toggle-img") %>
+            </a>
+          </p>
+          <div id="caracteristiques">
+            <table>
+              <tbody>
+              <tr>
+                <td>
+                  <div class="info">
+                    <% if strip_tags(field_value(@item, @planche_depliante)).present? %>
+                      <%= "Planche dépliante" if strip_tags(field_value(@item, @planche_depliante)) == "Oui" %>
+                    <% end %>
+                    <% if strip_tags(field_value(@item, @en_couleur)).present? %>
+                      <%= "En couleur" if strip_tags(field_value(@item, @en_couleur)) == "Oui" %>
+                    <% end %>
+                  </div>
+                  <% if strip_tags(field_value(@item, @largeur)).present? && strip_tags(field_value(@item, @hauteur)).present? %>
+                    <div class="info">
+                      <span>Dimensions</span><br>
+                      <%= field_value(@item, @largeur) %> x <%= field_value(@item, @hauteur) %> mm
+                    </div>
+                  <% end %>
+                </td>
+                <td>
+                  <% if strip_tags(field_value(@item, @emplacement_ouvrage)).present? %>
+                    <div class="info">
+                      <span>Emplacement dans l'ouvrage</span><br>
+                      <%= field_value(@item, @emplacement_ouvrage) %>
+                    </div>
+                  <% end %>
+                  <% if strip_tags(field_value(@item, @genre)).present? %>
+                    <div class="info">
+                      <span>Genre</span><br>
+                      <%= field_value(@item, @genre) %>
+                    </div>
+                  <% end %>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <% if strip_tags(field_value(@item, @remarque)).present? %>
+            <p class="info">
+              <a id ="remarquesLabel" href="#">
+                <span>Remarques</span><%= image_tag("arrow-expand.gif", :id => "arrowRemarques", :class => "info-toggle-img") %>
+              </a>
+            </p>
+            <div id="remarques">
+              <p class="info">
+                <span>Remarque du chercheur</span><br>
+                <%= field_value(@item, @remarque) %>
+              </p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </td>
+  </tr>
   </tbody>
 </table>
-
-<% fields_and_item_references(@item) do |field, browse| %>
-  <h3><%= field.item_type.name_plural %></h3>
-  <%= render_item_list(browse) %>
-  <% if browse.more? %>
-    <%= link_to(items_path(
-                    :item_type_slug => browse.item_type,
-                    browse.field.slug => browse.value
-                )) do %>
-      <%# TODO: i18n %>
-      View more
-      (<%= pluralize(browse.total_count, "item") %>)
-    <% end %>
-  <% end %>
-<% end %>

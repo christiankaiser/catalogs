@@ -1,13 +1,13 @@
 <% content_for :top_content do %>
   <% case @item_type.slug
-       when @corpus_item_type_slug %>
-    <div class="top-content-type-generic">
-      <%= render("shared/searchlinks") %>
-    </div>
-  <% else %>
+       when @image_item_type_image_slug %>
     <div class="top-content-type-item">
       <%= render("shared/searchlinks") %>
       <div class="items-nav"><%= render_item_list_nav(item_list, @item) if item_list %></div>
+    </div>
+  <% else %>
+    <div class="top-content-type-generic">
+      <%= render("shared/searchlinks") %>
     </div>
   <% end %>
 <% end %>
@@ -18,8 +18,10 @@
       <% case @item_type.slug
            when @corpus_item_type_slug %>
         <%= render("items/type/corpus") %>
-      <% else %>
+      <% when @image_item_type_image_slug %>
         <%= render("items/type/image") %>
+      <% else %>
+        <%= render("items/type/other") %>
       <% end %>
     </div>
   </div>

@@ -22,5 +22,5 @@
 </span>
 
 <% if !params[:q].blank? %>
-  <div class="nav-center">Recherche pour: "<%= params[:q] %>"</div>
+  <div class="nav-center">Recherche pour: "<%= params[:q].truncate(70) %>"</div>
 <% end %>
