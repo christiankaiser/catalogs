@@ -36,10 +36,6 @@
     </p>
   </div>
 
-  <% fields_and_item_references(@item) do |field, browse|  %>
-    <% @images_count = browse.total_count %>
-  <% end %>
-
   <span class="searchmsg">
      <%= t(".viat-title-images",
            :images_count => @images_count,

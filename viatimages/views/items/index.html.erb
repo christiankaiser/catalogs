@@ -15,7 +15,6 @@
             <%= @browse.total_count %> images pour l'ouvrage: <i>«<%= @corpus.item_type.primary_field.raw_value(@corpus) %>»</i>
           </span>
         </div>
-
       <% end %>
       <%= render_item_list(@browse) %>
       <%= paginate(@browse.items) %>
