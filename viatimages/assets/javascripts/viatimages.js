@@ -36,4 +36,13 @@ $( document ).ready(function() {
         }
         $('#remarques').animate({height: 'toggle'});
     });
+
+    replaceByCommas($("#caracteristiquesGenerales"));
 });
+
+function replaceByCommas(selector) {
+    if (selector.text().trim()) {
+        var str = selector.text().trim().replace(/[\t\n]+/g, ', ');
+        selector.text(str);
+    }
+}

@@ -43,6 +43,8 @@ class ViatimagesItemsController < ItemsController
           @hauteur = field if field.slug == "hauteur"
           @emplacement_ouvrage = field if field.slug == "emplacement-ouvrage"
           @genre = field if field.slug == "genre"
+          @critere_technique = field if field.slug == "critere-technique"
+          @location = field if field.slug == "location"
         end
       when @personnes_associee_item_type_slug
         # objects for the "personnes-associee" item type

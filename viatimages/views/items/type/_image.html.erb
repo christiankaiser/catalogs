@@ -23,7 +23,7 @@
           <span id="titreDetailTrad">«<%= field_value(@item, @titre) %>»</span>
         </div>
 
-        <div id="details_top">
+        <div id="details-top">
           <% if strip_tags(field_value(@item, @illustrateurs)).present? %>
             <p class="info"><span>Illustrateurs</span><br>
               <%= field_value(@item, @illustrateurs) %>
@@ -58,12 +58,19 @@
               <tbody>
               <tr>
                 <td>
-                  <div class="info">
+                  <div id="caracteristiquesGenerales" class="info">
+                    <%= strip_tags(field_value(@item, @critere_technique)).rstrip if strip_tags(field_value(@item, @critere_technique)).present? %>
+
                     <% if strip_tags(field_value(@item, @planche_depliante)).present? %>
-                      <%= "Planche dépliante" if strip_tags(field_value(@item, @planche_depliante)) == "Oui" %>
+                      <% if strip_tags(field_value(@item, @planche_depliante)) == "Oui" %>
+                        Planche dépliante
+                      <% end %>
                     <% end %>
+
                     <% if strip_tags(field_value(@item, @en_couleur)).present? %>
-                      <%= "En couleur" if strip_tags(field_value(@item, @en_couleur)) == "Oui" %>
+                      <% if strip_tags(field_value(@item, @en_couleur)) == "Oui" %>
+                        En couleur
+                      <% end %>
                     <% end %>
                   </div>
                   <% if strip_tags(field_value(@item, @largeur)).present? && strip_tags(field_value(@item, @hauteur)).present? %>
@@ -111,3 +118,39 @@
   </tr>
   </tbody>
 </table>
+
+<ul class="nav nav-tabs centered" id="image-tabs" role="tablist">
+  <li class="nav-item active">
+    <a class="nav-link" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="home" aria-selected="true">Détails</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="carte-tab" data-toggle="tab" href="#carte" role="tab" aria-controls="profile" aria-selected="false">Carte</a>
+  </li>
+</ul>
+<div class="tab-content" id="image-item-tabs-content">
+  <div class="tab-pane fade active in" id="details" role="tabpanel" aria-labelledby="details-tab">
+    <table style="width: 946px;">
+      <tbody>
+        <tr>
+          <td style="width: 223px; padding-right: 18px;">
+            <p class="info"><span>Domaines</span><br><a href="index.php?module=search&amp;action=search&amp;projet=viaticalpes&amp;lang=fr#/domaine-11">Paysage</a></p>
+            <p class="info"><span>Mots-clés</span><br><span class="keyword"><a href="index.php?lang=fr&amp;projet=viaticalpes&amp;#search-montagnes">montagnes</a></span> <span class="keyword"><a href="index.php?lang=fr&amp;projet=viaticalpes&amp;#search-cours d'eau">cours&nbsp;d'eau</a></span> <span class="keyword"><a href="index.php?lang=fr&amp;projet=viaticalpes&amp;#search-sentiers">sentiers</a></span> <span class="keyword"><a href="index.php?lang=fr&amp;projet=viaticalpes&amp;#search-glaciers">glaciers</a></span></p>
+          </td>
+          <td style="width: 223px; padding-right: 18px;">
+            <p class="info"><span>Géographie</span></p><p class="info">Continent: <a href="index.php?projet=viaticalpes&amp;module=mapsearch&amp;lang=fr#/feature-1">Europe</a></p><p class="info">Aire géographique: <a href="index.php?projet=viaticalpes&amp;module=mapsearch&amp;lang=fr#/feature-2">Europe occidentale</a></p><p class="info">État: <a href="index.php?projet=viaticalpes&amp;module=mapsearch&amp;lang=fr#/feature-8">Suisse</a></p><p class="info">Région/Canton: <a href="index.php?projet=viaticalpes&amp;module=mapsearch&amp;lang=fr#/feature-51">Valais</a></p><p class="info">Chaîne montagneuse: <a href="index.php?projet=viaticalpes&amp;module=mapsearch&amp;lang=fr#/feature-366">Alpes</a>, <a href="index.php?projet=viaticalpes&amp;module=mapsearch&amp;lang=fr#/feature-706">Alpes occidentales</a>, <a href="index.php?projet=viaticalpes&amp;module=mapsearch&amp;lang=fr#/feature-707">Alpes pennines</a></p><p class="info">Montagne: <a href="index.php?projet=viaticalpes&amp;module=mapsearch&amp;lang=fr#/feature-387">Cervin</a></p>
+          </td>
+          <td style="width: 446px; padding-right: 18px;">
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tab-pane fade" id="carte" role="tabpanel" aria-labelledby="carte-tab">
+    <div id="carte-content">
+      <%= field_value(@item, @location) %>
+    </div>
+  </div>
+</div>
+
+

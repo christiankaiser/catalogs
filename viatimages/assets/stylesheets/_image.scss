@@ -1,4 +1,5 @@
-#image-item-top-content td {
+#image-item-top-content td,
+#image-item-tabs-content td {
   vertical-align: top;
 }
 
@@ -60,10 +61,12 @@ div[id^="ImageViewer-react-component-"] {
 .imageViewer {
   width: 350px;
 }
-#details_top .info {
+#details-top .info,
+#image-item-tabs-content .info {
   margin-top: 15px;
 }
-#details_top .info span {
+#details-top .info span,
+#image-item-tabs-content .info span{
   color: #73746a;
 }
 #caracteristiques, #remarques {
@@ -83,4 +86,15 @@ div[id^="ImageViewer-react-component-"] {
 }
 #caracteristiquesLabel:focus, #remarquesLabel:focus {
   text-decoration: none;
+}
+#image-tabs {
+  margin-top: 35px;
+}
+#image-tabs li a {
+  width: 110px;
+}
+#carte-content {
+  width: 940px;
+  height: 450px;
+  margin-top: 10px;
 }
