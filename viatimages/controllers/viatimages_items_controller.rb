@@ -19,6 +19,8 @@ class ViatimagesItemsController < ItemsController
       when @corpus_item_type_slug
         # objects for the "corpus" item type
         @item.applicable_fields.each do |field|
+          @title = field if field.slug == "title"
+          @title_long = field if field.slug == "title-long"
           @lieu_edition = field if field.slug == "lieu-edition"
           @tome_volume = field if field.slug == "tome-volume"
           @langue_ouvrage = field if field.slug == "langue-ouvrage"
