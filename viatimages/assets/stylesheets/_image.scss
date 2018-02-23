@@ -2,7 +2,14 @@
 #image-item-tabs-content td {
   vertical-align: top;
 }
-
+#image-item-tabs-content td {
+  width: 446px;
+  padding-right: 18px;
+}
+#image-item-tabs-content table {
+  width: 946px;
+  padding-right: 18px;
+}
 div[id^="ImageViewer-react-component-"] {
   margin-top: -40px;
   margin-left: 30px;
@@ -97,4 +104,21 @@ div[id^="ImageViewer-react-component-"] {
   width: 940px;
   height: 450px;
   margin-top: 10px;
+}
+.mots-cles a {
+  background-color: #ffffff;
+  line-height: 27px;
+  padding: 2px 6px;
+  border: 1px solid #cccccc;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+#chercheur {
+  float: right;
+  margin-right: 25px;
+  text-align: right;
+  margin-top: 20px;
+}
+#inlinepdf-wrapper {
+  margin-top: 35px;
 }

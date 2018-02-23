@@ -47,3 +47,12 @@ fr:
           viat-other-editions: "Autres éditions"
           viat-title-images: "%{images_count} images pour l'ouvrage: «%{corpus_title}»"
           viat-view-more: "Voir plus"
+        image:
+          viat-illustrators: "Illustrateurs"
+          viat-original-source: "Ouvrage source"
+          viat-characteristics: "Caractéristiques"
+          viat-dimensions: "Dimensions"
+          viat-comments: "Remarques"
+          viat-researcher-comments: "Remarque du chercheur"
+          viat-index-desc: "Indexation/description"
+          viat-permanent-url: "URL permanente"

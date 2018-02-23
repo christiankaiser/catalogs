@@ -7,7 +7,7 @@
 
         <div id="info-wrapper">
           <hr>
-          <p id="info-content"><span>URL permanente:</span> https://purl.org/viatimages/fr/image/<%= @item.get_value('image-id') %></p>
+          <p id="info-content"><span><%= t(".viat-permanent-url") %>:</span> https://purl.org/viatimages/fr/image/<%= @item.get_value('image-id') %></p>
         </div>
       </div>
     </td>
@@ -25,13 +25,13 @@
 
         <div id="details-top">
           <% if strip_tags(field_value(@item, @illustrateurs)).present? %>
-            <p class="info"><span>Illustrateurs</span><br>
+            <p class="info"><span><%= t(".viat-illustrators") %></span><br>
               <%= field_value(@item, @illustrateurs) %>
             </p>
           <% end %>
 
           <% if strip_tags(field_value(@item, @corpus)).present? %>
-            <p class="info"><span>Ouvrage source</span><br>
+            <p class="info"><span><%= t(".viat-original-source") %></span><br>
               <%= field_value(@item, @corpus) %>
             </p>
           <% end %>
@@ -43,14 +43,14 @@
           <% end %>
 
           <% if strip_tags(field_value(@item, @description)).present? %>
-            <p class="info"><span>Description</span><br>
+            <p class="info"><span><%= @description.label %></span><br>
               <%= field_value(@item, @description) %>
             </p>
           <% end %>
 
           <p class="info">
             <a id="caracteristiquesLabel" href="#">
-              <span>Caractéristiques</span><%= image_tag("arrow-expand.gif", :id => "arrowCaracteristiques", :class => "info-toggle-img") %>
+              <span><%= t(".viat-characteristics") %></span><%= image_tag("arrow-expand.gif", :id => "arrowCaracteristiques", :class => "info-toggle-img") %>
             </a>
           </p>
           <div id="caracteristiques">
@@ -62,20 +62,20 @@
                     <%= strip_tags(field_value(@item, @critere_technique)).rstrip if strip_tags(field_value(@item, @critere_technique)).present? %>
 
                     <% if strip_tags(field_value(@item, @planche_depliante)).present? %>
-                      <% if strip_tags(field_value(@item, @planche_depliante)) == "Oui" %>
-                        Planche dépliante
+                      <% if @yes.include? strip_tags(field_value(@item, @planche_depliante)) %>
+                        <%= @planche_depliante.label %>
                       <% end %>
                     <% end %>
 
                     <% if strip_tags(field_value(@item, @en_couleur)).present? %>
-                      <% if strip_tags(field_value(@item, @en_couleur)) == "Oui" %>
-                        En couleur
+                      <% if @yes.include? strip_tags(field_value(@item, @en_couleur)) %>
+                        <%= @en_couleur.label %>
                       <% end %>
                     <% end %>
                   </div>
                   <% if strip_tags(field_value(@item, @largeur)).present? && strip_tags(field_value(@item, @hauteur)).present? %>
                     <div class="info">
-                      <span>Dimensions</span><br>
+                      <span><%= t(".viat-dimensions") %></span><br>
                       <%= field_value(@item, @largeur) %> x <%= field_value(@item, @hauteur) %> mm
                     </div>
                   <% end %>
@@ -83,13 +83,13 @@
                 <td>
                   <% if strip_tags(field_value(@item, @emplacement_ouvrage)).present? %>
                     <div class="info">
-                      <span>Emplacement dans l'ouvrage</span><br>
+                      <span><%= @emplacement_ouvrage.label %></span><br>
                       <%= field_value(@item, @emplacement_ouvrage) %>
                     </div>
                   <% end %>
                   <% if strip_tags(field_value(@item, @genre)).present? %>
                     <div class="info">
-                      <span>Genre</span><br>
+                      <span><%= @genre.label %></span><br>
                       <%= field_value(@item, @genre) %>
                     </div>
                   <% end %>
@@ -99,19 +99,31 @@
             </table>
           </div>
 
-          <% if strip_tags(field_value(@item, @remarque)).present? %>
-            <p class="info">
-              <a id ="remarquesLabel" href="#">
-                <span>Remarques</span><%= image_tag("arrow-expand.gif", :id => "arrowRemarques", :class => "info-toggle-img") %>
-              </a>
-            </p>
-            <div id="remarques">
+          <p class="info">
+            <a id ="remarquesLabel" href="#">
+              <span><%= t(".viat-comments") %></span><%= image_tag("arrow-expand.gif", :id => "arrowRemarques", :class => "info-toggle-img") %>
+            </a>
+          </p>
+          <div id="remarques">
+            <% if strip_tags(field_value(@item, @remarque)).present? %>
               <p class="info">
-                <span>Remarque du chercheur</span><br>
+                <span><%= t(".viat-researcher-comments") %></span><br>
                 <%= field_value(@item, @remarque) %>
               </p>
-            </div>
-          <% end %>
+            <% end %>
+            <% if strip_tags(field_value(@item, @lieu_edition_image)).present? %>
+              <p class="info">
+                <span><%= @lieu_edition_image.label %></span><br>
+                <%= field_value(@item, @lieu_edition_image) %>
+              </p>
+            <% end %>
+            <% if strip_tags(field_value(@item, @date_evenement)).present? %>
+              <p class="info">
+                <span><%= @date_evenement.label %></span><br>
+                <%= field_value(@item, @date_evenement) %>
+              </p>
+            <% end %>
+          </div>
         </div>
       </div>
     </td>
@@ -129,18 +141,30 @@
 </ul>
 <div class="tab-content" id="image-item-tabs-content">
   <div class="tab-pane fade active in" id="details" role="tabpanel" aria-labelledby="details-tab">
-    <table style="width: 946px;">
+    <table>
       <tbody>
         <tr>
-          <td style="width: 223px; padding-right: 18px;">
-            <p class="info"><span>Domaines</span><br><a href="index.php?module=search&amp;action=search&amp;projet=viaticalpes&amp;lang=fr#/domaine-11">Paysage</a></p>
-            <p class="info"><span>Mots-clés</span><br><span class="keyword"><a href="index.php?lang=fr&amp;projet=viaticalpes&amp;#search-montagnes">montagnes</a></span> <span class="keyword"><a href="index.php?lang=fr&amp;projet=viaticalpes&amp;#search-cours d'eau">cours&nbsp;d'eau</a></span> <span class="keyword"><a href="index.php?lang=fr&amp;projet=viaticalpes&amp;#search-sentiers">sentiers</a></span> <span class="keyword"><a href="index.php?lang=fr&amp;projet=viaticalpes&amp;#search-glaciers">glaciers</a></span></p>
+          <td>
+            <% if strip_tags(field_value(@item, @domaine)).present? %>
+              <p class="info"><span><%= @domaine.label %></span><br>
+                <%= field_value(@item, @domaine) %>
+              </p>
+            <% end %>
+            <% if strip_tags(field_value(@item, @keyword)).present? %>
+              <p class="info mots-cles"><span><%= @keyword.label %></span><br>
+                <%= field_value(@item, @keyword) %>
+              </p>
+            <% end %>
           </td>
-          <td style="width: 223px; padding-right: 18px;">
-            <p class="info"><span>Géographie</span></p><p class="info">Continent: <a href="index.php?projet=viaticalpes&amp;module=mapsearch&amp;lang=fr#/feature-1">Europe</a></p><p class="info">Aire géographique: <a href="index.php?projet=viaticalpes&amp;module=mapsearch&amp;lang=fr#/feature-2">Europe occidentale</a></p><p class="info">État: <a href="index.php?projet=viaticalpes&amp;module=mapsearch&amp;lang=fr#/feature-8">Suisse</a></p><p class="info">Région/Canton: <a href="index.php?projet=viaticalpes&amp;module=mapsearch&amp;lang=fr#/feature-51">Valais</a></p><p class="info">Chaîne montagneuse: <a href="index.php?projet=viaticalpes&amp;module=mapsearch&amp;lang=fr#/feature-366">Alpes</a>, <a href="index.php?projet=viaticalpes&amp;module=mapsearch&amp;lang=fr#/feature-706">Alpes occidentales</a>, <a href="index.php?projet=viaticalpes&amp;module=mapsearch&amp;lang=fr#/feature-707">Alpes pennines</a></p><p class="info">Montagne: <a href="index.php?projet=viaticalpes&amp;module=mapsearch&amp;lang=fr#/feature-387">Cervin</a></p>
+          <td>
+            <% if strip_tags(field_value(@item, @geographie)).present? %>
+              <p class="info"><span><%= @geographie.label %></span></p>
+              <% @item.get_value(@geographie).each do |item| %>
+                <p class="info"><%= strip_tags(field_value(item, item.item_type.find_field('feature-class'))) %>: <%= field_value(item, item.item_type.find_field('name')) %></p>
+              <% end %>
+            <% end %>
           </td>
-          <td style="width: 446px; padding-right: 18px;">
-
+          <td>
           </td>
         </tr>
       </tbody>
@@ -151,6 +175,19 @@
       <%= field_value(@item, @location) %>
     </div>
   </div>
+
+  <div id="inlinepdf-wrapper">
+    <div id="inlinepdf">
+      ! TODO INLINE PDF
+      <!-- <iframe id="inlinePdfFrame" style="width: 100%; height: 500px;" src="https://www2.unil.ch/viatimages/pdfview/index.php?url=https://www2.unil.ch/viatimages/viatimages/pdf/emery1901_bn_klff2230_185_188.pdf"></iframe> -->
+    </div>
+  </div>
+
+  <% if strip_tags(field_value(@item, @chercheur)).present? %>
+    <div id="chercheur">
+      <%= t(".viat-index-desc") %>: <%= field_value(@item, @chercheur) %>
+    </div>
+  <% end %>
 </div>
 
 

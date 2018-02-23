@@ -37,6 +37,8 @@ class ViatimagesItemsController < ItemsController
           @corpus = field if field.slug == "corpus"
           @description = field if field.slug == "description"
           @remarque = field if field.slug == "remarque"
+          @lieu_edition_image = field if field.slug == "lieu-edition"
+          @date_evenement = field if field.slug == "date-evenement"
           @planche_depliante = field if field.slug == "planche-depliante"
           @en_couleur = field if field.slug == "en-couleurs"
           @largeur = field if field.slug == "largeur"
@@ -45,7 +47,12 @@ class ViatimagesItemsController < ItemsController
           @genre = field if field.slug == "genre"
           @critere_technique = field if field.slug == "critere-technique"
           @location = field if field.slug == "location"
+          @domaine = field if field.slug == "domaine"
+          @keyword = field if field.slug == "keyword"
+          @geographie = field if field.slug == "geographie"
+          @chercheur = field if field.slug == "chercheur"
         end
+        @yes = ["Oui","Ja","Yes","Si"]
       when @personnes_associee_item_type_slug
         # objects for the "personnes-associee" item type
     end

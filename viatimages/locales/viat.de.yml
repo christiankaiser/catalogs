@@ -47,3 +47,12 @@ de:
           viat-other-editions: "Andere Auflagen"
           viat-title-images: "%{images_count} Bilder für das Werk: «%{corpus_title}»"
           viat-view-more: "Mehr sehen"
+        image:
+          viat-illustrators: "Illustratoren"
+          viat-original-source: "Herkunftsbuch"
+          viat-characteristics: "Merkmale"
+          viat-dimensions: "Dimensionen"
+          viat-comments: "Bemerkungen"
+          viat-researcher-comments: "Anmerkung des Forschers"
+          viat-index-desc: "Indexierung/bildbeschreibung"
+          viat-permanent-url: "Permanente URL"
