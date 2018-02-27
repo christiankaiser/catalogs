@@ -37,14 +37,8 @@ en:
         corpus:
           viat-catalog-record: "Library catalogue record"
           viat-publisher: "Publisher"
-          viat-publishing-date: "Publishing date"
-          viat-publication-place: "Place of publication"
           viat-online-book-collection: "Online book or collection"
           viat-description: "Description"
-          viat-comments: "Comments"
-          viat-book-collection: "Book collection"
-          viat-book-language: "Book language"
-          viat-other-editions: "Other editions"
           viat-title-images: "%{images_count} images for the book: «%{corpus_title}»"
           viat-view-more: "View more"
         image:

@@ -14,8 +14,12 @@
   <div id="corpus-details">
     <p class="corpusInfo">
       <span><%= t(".viat-publisher") %>:</span> ?<br>
-      <span><%= t(".viat-publishing-date") %>:</span> <%= @item.get_value('date-edition')['Y'] %><br>
-      <span><%= t(".viat-publication-place") %>:</span> <%= field_value(@item, @lieu_edition) %>
+      <% if strip_tags(field_value(@item, @date_edition)).present? %>
+        <span><%= @date_edition.label %>:</span> <%= field_value(@item, @date_edition) %><br>
+      <% end %>
+      <% if strip_tags(field_value(@item, @lieu_edition)).present? %>
+        <span><%= @lieu_edition.label %>:</span> <%= field_value(@item, @lieu_edition) %>
+      <% end %>
     </p>
 
     <p class="corpusInfo">
@@ -24,19 +28,44 @@
 
     <p class="corpusInfo">
       <span><%= t(".viat-description") %>:</span><br>
-      ? - <%= field_value(@item, @tome_volume) %> Tome(s)&nbsp;/&nbsp;Volume(s), <%= @item.get_value('nbre-illustrations') %> illustration(s)<br>
-      <a href="<%= @etablissement.get_value('web') %>" target="_blank"><%= @etablissement.item_type.find_field('name').raw_value(@etablissement) %></a> - <%= @item.item_type.find_field('cote').label %>: <%= @item.get_value('cote') %> - <a href="<%=  @item.get_value('url-catalogue') %>" target="_blank" title="<%= t(".viat-catalog-record") %>"><%= t(".viat-catalog-record") %></a>
+      ?
+      <% if strip_tags(field_value(@item, @tome_volume)).present? %>
+        - <%= field_value(@item, @tome_volume) %> Tome(s)/Volume(s)
+      <% end %>
+      <% if strip_tags(field_value(@item, @nbre_illustrations)).present? %>
+      , <%= field_value(@item, @nbre_illustrations) %> illustration(s)
+      <% end %>
+
+      <br>
+
+      <% if @etablissement.get_value('web').present? %>
+        <a href="<%= @etablissement.get_value('web') %>" target="_blank"><%= field_value(@etablissement, @etablissement.item_type.find_field('name')) %></a>
+      <% end %>
+      <% if strip_tags(field_value(@item, @cote)).present? %>
+        - <%= @cote.label %>: <%= field_value(@item, @cote) %>
+      <% end %>
+      <% if strip_tags(field_value(@item, @url_catalogue)).present? %>
+        - <a href="<%= strip_tags(field_value(@item, @url_catalogue)) %>" target="_blank" title="<%= t(".viat-catalog-record") %>"><%= t(".viat-catalog-record") %></a>
+      <% end %>
     </p>
 
-    <p class="corpusInfo">
-      <span><%= t(".viat-comments") %>:</span><br>
-      <%= @item.get_value('comment') %>
-    </p>
+    <% if strip_tags(field_value(@item, @comment)).present? %>
+      <p class="corpusInfo">
+        <span><%= @comment.label %>:</span><br>
+        <%= field_value(@item, @comment) %>
+      </p>
+    <% end %>
 
     <p class="corpusInfo">
-      <span><%= t(".viat-book-collection") %>:</span> <%= @collection_ouvrage.raw_value(@item) %><br>
-      <span><%= t(".viat-book-language") %>:</span> <%= @langue_ouvrage.selected_choice(@item).short_name if @langue_ouvrage.selected_choice(@item).present? %><br>
-      <span><%= t(".viat-other-editions") %>:</span> <%= @autre_editions.raw_value(@item) %><br>
+      <% if strip_tags(field_value(@item, @collection_ouvrage)).present? %>
+        <span><%= @collection_ouvrage.label %>:</span> <%= field_value(@item, @collection_ouvrage) %><br>
+      <% end %>
+      <% if strip_tags(field_value(@item, @langue_ouvrage)).present? %>
+        <span><%= @langue_ouvrage.label %>:</span> <%= field_value(@item, @langue_ouvrage) %><br>
+      <% end %>
+      <% if strip_tags(field_value(@item, @autre_editions)).present? %>
+        <span><%= @autre_editions.label %>:</span> <%= field_value(@item, @autre_editions) %>
+      <% end %>
     </p>
   </div>
 

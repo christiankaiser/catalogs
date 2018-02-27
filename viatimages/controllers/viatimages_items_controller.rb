@@ -12,7 +12,6 @@ class ViatimagesItemsController < ItemsController
 
     @corpus_item_type_slug = "corpus"
     @image_item_type_image_slug = "images"
-    @personnes_associee_item_type_slug = "personnes-associee"
 
     # Prepare some objects for the view according to the item type slug
     case @item_type.slug
@@ -22,9 +21,14 @@ class ViatimagesItemsController < ItemsController
           @title = field if field.slug == "title"
           @title_long = field if field.slug == "title-long"
           @lieu_edition = field if field.slug == "lieu-edition"
+          @date_edition = field if field.slug == "date-edition"
           @tome_volume = field if field.slug == "tome-volume"
-          @langue_ouvrage = field if field.slug == "langue-ouvrage"
+          @nbre_illustrations = field if field.slug == "nbre-illustrations"
+          @cote = field if field.slug == "cote"
+          @url_catalogue = field if field.slug == "url-catalogue"
+          @comment = field if field.slug == "comment"
           @collection_ouvrage = field if field.slug == "collection-ouvrage"
+          @langue_ouvrage = field if field.slug == "langue-ouvrage"
           @autre_editions = field if field.slug == "autres-editions"
         end
         @etablissement = @item.get_value('etablissement')
@@ -55,8 +59,6 @@ class ViatimagesItemsController < ItemsController
           @chercheur = field if field.slug == "chercheur"
         end
         @yes = ["Oui","Ja","Yes","Si"]
-      when @personnes_associee_item_type_slug
-        # objects for the "personnes-associee" item type
     end
   end
 end
