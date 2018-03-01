@@ -19,6 +19,7 @@ class ViatimagesItemsController < ItemsController
         # objects for the "corpus" item type
         @item.applicable_fields.each do |field|
           @title = field if field.slug == "title"
+          @titre_trad = field if field.slug == "title-trad"
           @title_long = field if field.slug == "title-long"
           @lieu_edition = field if field.slug == "lieu-edition"
           @date_edition = field if field.slug == "date-edition"
@@ -36,7 +37,9 @@ class ViatimagesItemsController < ItemsController
       when @image_item_type_image_slug
         # objects for the "images" item type
         @item.applicable_fields.each do |field|
+          @image_id = field if field.slug == "image-id"
           @image = field if field.slug == "image"
+          @texte_image = field if field.slug == "texte-image"
           @titre_orig = field if field.slug == "orig-title"
           @titre = field if field.slug == "title"
           @illustrateurs = field if field.slug == "personne-associee"
@@ -56,6 +59,7 @@ class ViatimagesItemsController < ItemsController
           @domaine = field if field.slug == "domaine"
           @keyword = field if field.slug == "keyword"
           @geographie = field if field.slug == "geographie"
+          @texte_legende = field if field.slug == "texte-legende"
           @chercheur = field if field.slug == "chercheur"
         end
         @yes = ["Oui","Ja","Yes","Si"]

@@ -37,6 +37,16 @@ $( document ).ready(function() {
         $('#remarques').animate({height: 'toggle'});
     });
 
+    $("a#texteImageLabel").click(function() {
+        d = $('#texteImage').css('display');
+        if (d == 'none') {
+            $('#arrowtexteImage').attr('src', '/assets/arrow-collapse.gif');
+        } else {
+            $('#arrowtexteImage').attr('src', '/assets/arrow-expand.gif');
+        }
+        $('#texteImage').animate({height: 'toggle'});
+    });
+
     replaceByCommas($("#caracteristiquesGenerales"));
 });
 

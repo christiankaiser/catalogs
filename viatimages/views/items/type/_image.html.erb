@@ -3,12 +3,29 @@
   <tr>
     <td id="image-column">
       <div>
-        <%= field_value(@item, @image) %>
+        <div id="image-content">
+          <%= field_value(@item, @image) %>
 
-        <div id="info-wrapper">
-          <hr>
-          <p id="info-content"><span><%= t(".viat-permanent-url") %>:</span> https://purl.org/viatimages/fr/image/<%= @item.get_value('image-id') %></p>
+          <% if strip_tags(field_value(@item, @texte_image)).present? %>
+            <div id="imgToolbar">
+              <p class="info">
+                <a id ="texteImageLabel" href="#">
+                  <span><%= @texte_image.label %></span><%= image_tag("arrow-expand.gif", :id => "arrowtexteImage", :class => "info-toggle-img") %>
+                </a>
+              </p>
+              <div id="texteImage">
+                <%= field_value(@item, @texte_image) %>
+              </div>
+            </div>
+          <% end %>
         </div>
+
+        <% if strip_tags(field_value(@item, @image_id)).present? %>
+          <div id="info-wrapper">
+            <hr>
+            <p id="info-content"><span><%= t(".viat-permanent-url") %>:</span> https://purl.org/viatimages/<%= params[:locale] %>/image/<%= @image_id.raw_value(@item) %></p>
+          </div>
+        <% end %>
       </div>
     </td>
     <td id="description-column">
@@ -139,9 +156,11 @@
   <li class="nav-item active">
     <a class="nav-link" id="details-tab" data-toggle="tab" href="#details" role="tab" aria-controls="home" aria-selected="true"><%= t(".viat-details") %></a>
   </li>
-  <li class="nav-item">
-    <a class="nav-link" id="carte-tab" data-toggle="tab" href="#carte" role="tab" aria-controls="profile" aria-selected="false"><%= t(".viat-map") %></a>
-  </li>
+  <% if strip_tags(field_value(@item, @location)).present? %>
+    <li class="nav-item">
+      <a class="nav-link" id="carte-tab" data-toggle="tab" href="#carte" role="tab" aria-controls="profile" aria-selected="false"><%= t(".viat-map") %></a>
+    </li>
+  <% end %>
 </ul>
 <div class="tab-content" id="image-item-tabs-content">
   <div class="tab-pane fade active in" id="details" role="tabpanel" aria-labelledby="details-tab">
@@ -169,15 +188,22 @@
             <% end %>
           </td>
           <td>
+            <% if strip_tags(field_value(@item, @texte_legende)).present? %>
+              <p class="info"><span>Légende</span><br>
+                <%= field_value(@item, @texte_legende) %>
+              </p>
+            <% end %>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
   <div class="tab-pane fade" id="carte" role="tabpanel" aria-labelledby="carte-tab">
-    <div id="carte-content">
-      <%= field_value(@item, @location) %>
-    </div>
+    <% if strip_tags(field_value(@item, @location)).present? %>
+      <div id="carte-content">
+        <%= field_value(@item, @location) %>
+      </div>
+    <% end %>
   </div>
 
   <div id="inlinepdf-wrapper">

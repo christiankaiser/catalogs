@@ -29,7 +29,7 @@
       <div id="searchdomain">
         <span><%= t(".viat-by-domain") %></span>
         <div id="searchdomain-dropdown">
-          <select id="sel_domain_court" name="sel_domain_court">
+          <select id="sel_domain_court" name="sel_domain_court" onchange="location = this.value;">
             <option value="" selected="selected"><%= t(".viat-select-domain") %></option>
             <% if @domain_choice_set_items %>
               <% @domain_choice_set_items.each_with_index do | domain, index | %>

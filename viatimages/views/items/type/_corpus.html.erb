@@ -3,6 +3,12 @@
     <h2 id="titreOuvrage"><%= field_value(@item, @title) %></h2>
   <% end %>
 
+  <!--
+  <%#= if strip_tags(field_value(@item, @titre_trad)).present? %>
+    <h2 id="titreOuvrageTrad"><%#= field_value(@item, @titre_trad) %></h2>
+  <%#= end %>
+  -->
+
   <% if strip_tags(field_value(@item, @title_long)).present? %>
     <h4 id="titreOuvrageLong"><%= field_value(@item, @title_long) %></h4>
   <% end %>
