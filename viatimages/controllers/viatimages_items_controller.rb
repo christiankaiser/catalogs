@@ -22,6 +22,8 @@ class ViatimagesItemsController < ItemsController
           @titre_trad = field if field.slug == "title-trad"
           @title_long = field if field.slug == "title-long"
           @lieu_edition = field if field.slug == "lieu-edition"
+          @siecle_edition = field if field.slug == "siecle-edition"
+          @siecle_voyage = field if field.slug == "siecle-voyage"
           @date_edition = field if field.slug == "date-edition"
           @tome_volume = field if field.slug == "tome-volume"
           @nbre_illustrations = field if field.slug == "nbre-illustrations"
@@ -31,9 +33,11 @@ class ViatimagesItemsController < ItemsController
           @collection_ouvrage = field if field.slug == "collection-ouvrage"
           @langue_ouvrage = field if field.slug == "langue-ouvrage"
           @autre_editions = field if field.slug == "autres-editions"
+          @provenance_collection = field if field.slug == "provenance"
+          @description_collection = field if field.slug == "description"
         end
         @etablissement = @item.get_value('etablissement')
-        fields_and_item_references(@item) do |field, browse| @images_count = browse.total_count end
+        fields_and_item_references(@item) do |_, browse| @images_count = browse.total_count end
       when @image_item_type_image_slug
         # objects for the "images" item type
         @item.applicable_fields.each do |field|
