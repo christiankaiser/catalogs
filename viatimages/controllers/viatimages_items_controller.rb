@@ -67,6 +67,10 @@ class ViatimagesItemsController < ItemsController
           @chercheur = field if field.slug == "chercheur"
         end
         @yes = ["Oui","Ja","Yes","Si"]
+
+        if @geographie
+          @geographie_sorted = @item.get_value(@geographie).group_by{|item| item.item_type.find_field('feature-class').raw_value(item)}.values
+        end
     end
   end
 end
