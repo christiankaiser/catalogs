@@ -48,11 +48,20 @@ $( document ).ready(function() {
     });
 
     replaceByCommas($("#caracteristiquesGenerales"));
+
+    replaceByHyphen($("#caracteristiquesEmplacement"));
 });
 
 function replaceByCommas(selector) {
     if (selector.text().trim()) {
         var str = selector.text().trim().replace(/[\t\n]+/g, ', ');
+        selector.text(str);
+    }
+}
+
+function replaceByHyphen(selector) {
+    if (selector.text().trim()) {
+        var str = selector.text().trim().replace(/[\t\n]+/g, ' - ');
         selector.text(str);
     }
 }

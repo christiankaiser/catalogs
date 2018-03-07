@@ -113,10 +113,17 @@
                   <% end %>
                 </td>
                 <td>
-                  <% if (@emplacement && strip_tags(field_value(@item, @emplacement)).present?) && (@emplacement_ouvrage && strip_tags(field_value(@item, @emplacement_ouvrage)).present?) %>
+                  <% if (@emplacement && strip_tags(field_value(@item, @emplacement)).present?) || (@emplacement_ouvrage && strip_tags(field_value(@item, @emplacement_ouvrage)).present?) %>
                     <div class="info">
                       <span><%= @emplacement_ouvrage.label %></span><br>
-                      <%= field_value(@item, @emplacement) %> - <%= field_value(@item, @emplacement_ouvrage) %>
+                      <div id="caracteristiquesEmplacement">
+                        <% if @emplacement && strip_tags(field_value(@item, @emplacement)).present? %>
+                          <%= field_value(@item, @emplacement) %>
+                        <% end %>
+                        <% if @emplacement_ouvrage && strip_tags(field_value(@item, @emplacement_ouvrage)).present? %>
+                          <%= field_value(@item, @emplacement_ouvrage) %>
+                        <% end %>
+                      </div>
                     </div>
                   <% end %>
                   <% if @genre && strip_tags(field_value(@item, @genre)).present? %>
