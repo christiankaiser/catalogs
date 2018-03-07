@@ -52,3 +52,5 @@ en:
           viat-permanent-url: "Permanent URL"
           viat-details: "Details"
           viat-map: "Map"
+          viat-map-type: "Type of map"
+          viat-legend: "Legend"

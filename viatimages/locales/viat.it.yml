@@ -52,3 +52,5 @@ it:
           viat-permanent-url: "URL permanente"
           viat-details: "Dettagli"
           viat-map: "Carta"
+          viat-map-type: "Tipo di carta"
+          viat-legend: "Legenda"

@@ -83,13 +83,16 @@
                 <td>
                   <div id="caracteristiquesGenerales" class="info">
                     <%= strip_tags(field_value(@item, @critere_technique)) if @critere_technique && strip_tags(field_value(@item, @critere_technique)).present? %>
-
+                    <% if @illustration_composee && strip_tags(field_value(@item, @illustration_composee)).present? %>
+                      <% if @yes.include? strip_tags(field_value(@item, @illustration_composee)) %>
+                        <%= @illustration_composee.label %>
+                      <% end %>
+                    <% end %>
                     <% if @planche_depliante && strip_tags(field_value(@item, @planche_depliante)).present? %>
                       <% if @yes.include? strip_tags(field_value(@item, @planche_depliante)) %>
                         <%= @planche_depliante.label %>
                       <% end %>
                     <% end %>
-
                     <% if @en_couleur && strip_tags(field_value(@item, @en_couleur)).present? %>
                       <% if @yes.include? strip_tags(field_value(@item, @en_couleur)) %>
                         <%= @en_couleur.label %>
@@ -102,18 +105,30 @@
                       <%= field_value(@item, @largeur) %> x <%= field_value(@item, @hauteur) %> mm
                     </div>
                   <% end %>
+                  <% if @echelle_origine && strip_tags(field_value(@item, @echelle_origine)).present? %>
+                    <div class="info">
+                      <span><%= @echelle_origine.label %></span><br>
+                      <%= field_value(@item, @echelle_origine) %>
+                    </div>
+                  <% end %>
                 </td>
                 <td>
-                  <% if @emplacement_ouvrage && strip_tags(field_value(@item, @emplacement_ouvrage)).present? %>
+                  <% if (@emplacement && strip_tags(field_value(@item, @emplacement)).present?) && (@emplacement_ouvrage && strip_tags(field_value(@item, @emplacement_ouvrage)).present?) %>
                     <div class="info">
                       <span><%= @emplacement_ouvrage.label %></span><br>
-                      <%= field_value(@item, @emplacement_ouvrage) %>
+                      <%= field_value(@item, @emplacement) %> - <%= field_value(@item, @emplacement_ouvrage) %>
                     </div>
                   <% end %>
                   <% if @genre && strip_tags(field_value(@item, @genre)).present? %>
                     <div class="info">
                       <span><%= @genre.label %></span><br>
                       <%= field_value(@item, @genre) %>
+                    </div>
+                  <% end %>
+                  <% if @descripteur_carte && strip_tags(field_value(@item, @descripteur_carte)).present? %>
+                    <div class="info">
+                      <span><%= t(".viat-map-type") %></span><br>
+                      <%= field_value(@item, @descripteur_carte) %>
                     </div>
                   <% end %>
                 </td>
@@ -200,7 +215,7 @@
           </td>
           <td>
             <% if @texte_legende && strip_tags(field_value(@item, @texte_legende)).present? %>
-              <p class="info"><span>Légende</span><br>
+              <p class="info"><span><%= t(".viat-legend") %></span><br>
                 <%= field_value(@item, @texte_legende) %>
               </p>
             <% end %>
