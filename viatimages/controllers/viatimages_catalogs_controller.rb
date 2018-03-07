@@ -10,8 +10,13 @@ class ViatimagesCatalogsController < CatalogsController
 
     # Retrieve & sort the all the domains
     domain_choice_set = ChoiceSet.where(catalog_id: @catalog.id).where(name: 'Domaines')
-    @domain_choice_set_items = nil if domain_choice_set.empty?
-    @domain_choice_set_items = Choice.where(choice_set_id: domain_choice_set.ids.first).sorted
+    domain_choice_set_items = domain_choice_set.empty? ? nil : Choice.where(choice_set_id: domain_choice_set.ids.first).sorted
+    @domain_choice_set_items = Hash.new
+    domain_choice_set_items.each do |domain|
+      value_slug = [I18n.locale, domain.short_name].join("-")
+      link = [I18n.locale, "images?domaine=#{value_slug}"].join("/")
+      @domain_choice_set_items.store(domain, link)
+    end
 
     # Retrieve & sort the first 20 most used keywords
     image_type_keyword_field = image_type.present? ? image_type.first.find_field('keyword') : nil

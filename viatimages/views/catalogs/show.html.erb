@@ -32,8 +32,8 @@
           <select id="sel_domain_court" name="sel_domain_court" onchange="location = this.value;">
             <option value="" selected="selected"><%= t(".viat-select-domain") %></option>
             <% if @domain_choice_set_items %>
-              <% @domain_choice_set_items.each do | domain | %>
-                <option value="<%= domain.short_name %>"><%= domain.short_name %></option>
+              <% @domain_choice_set_items.each do | domain, link | %>
+                <option value="<%= link %>"><%= domain.short_name %></option>
               <% end %>
             <% end %>
           </select>

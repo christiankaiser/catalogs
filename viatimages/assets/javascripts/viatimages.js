@@ -47,21 +47,13 @@ $( document ).ready(function() {
         $('#texteImage').animate({height: 'toggle'});
     });
 
-    replaceByCommas($("#caracteristiquesGenerales"));
-
-    replaceByHyphen($("#caracteristiquesEmplacement"));
+    replaceLineBreakBy($("#caracteristiquesGenerales"), ', ');
+    replaceLineBreakBy($("#caracteristiquesEmplacement"), ' - ');
 });
 
-function replaceByCommas(selector) {
+function replaceLineBreakBy(selector, replaceBy) {
     if (selector.text().trim()) {
-        var str = selector.text().trim().replace(/[\t\n]+/g, ', ');
-        selector.text(str);
-    }
-}
-
-function replaceByHyphen(selector) {
-    if (selector.text().trim()) {
-        var str = selector.text().trim().replace(/[\t\n]+/g, ' - ');
+        var str = selector.text().trim().replace(/[\t\n]+/g, replaceBy);
         selector.text(str);
     }
 }
