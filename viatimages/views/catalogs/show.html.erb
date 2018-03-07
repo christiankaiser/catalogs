@@ -33,7 +33,7 @@
             <option value="" selected="selected"><%= t(".viat-select-domain") %></option>
             <% if @domain_choice_set_items %>
               <% @domain_choice_set_items.each do | domain, link | %>
-                <option value="<%= link %>"><%= domain.short_name %></option>
+                <option value="<%= link %>"><%= domain.short_name.truncate(70) %></option>
               <% end %>
             <% end %>
           </select>
@@ -60,7 +60,7 @@
         <% if @keywords_count %>
           <% @keywords_count.each do | keyword, style | %>
             <span class="tag <%= style %>">
-              <a href="/<%= @catalog.slug %>/<%= params[:locale] %>/search?utf8=✓&type=images&q=<%= keyword %>">
+              <a href="<%= @keywords_base_url + keyword%>">
                 <%= keyword %>
               </a>
             </span>

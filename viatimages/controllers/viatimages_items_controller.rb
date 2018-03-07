@@ -36,6 +36,7 @@ class ViatimagesItemsController < ItemsController
           @provenance_collection = field if field.slug == "provenance"
           @description_collection = field if field.slug == "description"
         end
+
         @etablissement = @item.get_value('etablissement')
         fields_and_item_references(@item) do |_, browse| @images_count = browse.total_count end
       when @image_item_type_image_slug
@@ -70,9 +71,13 @@ class ViatimagesItemsController < ItemsController
           @texte_legende = field if field.slug == "texte-legende"
           @chercheur = field if field.slug == "chercheur"
         end
-        @yes = ["Oui","Ja","Yes","Si"]
+
+        # get all short name values from yes/no choice set
+        choice_yn = Choice.where("uuid LIKE :query", query: "viati%-choiceset-ouinon-1")
+        @yes = choice_yn.present? ? choice_yn.first.short_name_translations.values : Array.new
 
         if @geographie
+          # regroup all geography values by feature-class
           @geographie_sorted = @item.get_value(@geographie).group_by{|item| item.item_type.find_field('feature-class').raw_value(item)}.values
         end
     end

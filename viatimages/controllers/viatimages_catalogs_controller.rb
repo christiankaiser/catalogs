@@ -20,7 +20,7 @@ class ViatimagesCatalogsController < CatalogsController
 
     # Retrieve & sort the first 20 most used keywords
     image_type_keyword_field = image_type.present? ? image_type.first.find_field('keyword') : nil
-    image_type_items_with_keywords = image_type_keyword_field.present? ? Item.where(item_type_id: image_type.ids.first).where("data ->> '#{image_type_keyword_field.uuid}' != '[]'") : []
+    image_type_items_with_keywords = image_type_keyword_field.present? ? Item.where(item_type_id: image_type.ids.first).where("data ->> '#{image_type_keyword_field.uuid}' != '[]'") : Array.new
     keywords = Array.new
     image_type_items_with_keywords.each do |a|
       a.get_value('keyword').each do |b|
@@ -43,5 +43,6 @@ class ViatimagesCatalogsController < CatalogsController
         {keyword => 'small'}
       end
     }.reduce(:merge)
+    @keywords_base_url = [I18n.locale, "search?utf8=✓&type=images&q="].join("/")
   end
 end
