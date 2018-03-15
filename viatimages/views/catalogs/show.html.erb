@@ -49,9 +49,6 @@
               <% @corpus_type_items.each do | corpus | %>
                 <option value="<%= item_path(:catalog_slug => corpus.catalog, :item_type_slug => corpus.item_type, :locale => I18n.locale, :id => corpus) %>">
                   <%= corpus.get_value("title").truncate(70) %>
-                  <% if corpus.get_value("nbre-illustrations").present? %>
-                    (<%= corpus.get_value("nbre-illustrations") %>)
-                  <% end %>
                 </option>
               <% end %>
             <% end %>

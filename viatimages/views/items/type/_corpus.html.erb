@@ -62,7 +62,7 @@
         - <%= @cote.label %>: <%= field_value(@item, @cote) %>
       <% end %>
       <% if @url_catalogue && strip_tags(field_value(@item, @url_catalogue)).present? %>
-        - <a href="<%= strip_tags(field_value(@item, @url_catalogue)) %>" target="_blank" title="<%= t(".viat-catalog-record") %>"><%= t(".viat-catalog-record") %></a>
+        - <a href="http://<%= strip_tags(field_value(@item, @url_catalogue)) %>" target="_blank" title="<%= t(".viat-catalog-record") %>"><%= t(".viat-catalog-record") %></a>
       <% end %>
     </p>
 
