@@ -70,6 +70,7 @@ class ViatimagesItemsController < ItemsController
           @geographie = field if field.slug == "geographie"
           @texte_legende = field if field.slug == "texte-legende"
           @chercheur = field if field.slug == "chercheur"
+          @texte_associe = field if field.slug == "texte-associe"
         end
 
         # get all short name values from yes/no choice set

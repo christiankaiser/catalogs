@@ -47,6 +47,14 @@ $( document ).ready(function() {
         $('#texteImage').animate({height: 'toggle'});
     });
 
+    $("#sel_texte_associe").change(function() {
+        var path = this.value;
+        $('#inlinePdfFrame').attr('src', path);
+        $('#pdfLink a').each(function() {
+            $(this).attr('href', path);
+        });
+    });
+
     replaceLineBreakBy($("#caracteristiquesGenerales"), ', ');
     replaceLineBreakBy($("#caracteristiquesEmplacement"), ' - ');
 });

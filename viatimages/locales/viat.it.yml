@@ -54,3 +54,6 @@ it:
           viat-map: "Carta"
           viat-map-type: "Tipo di carta"
           viat-legend: "Legenda"
+          viat-author-texts: "Testi dell'autore"
+          viat-download-pdf: "Scarica il PDF"
+          viat-document: "Documento"

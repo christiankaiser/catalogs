@@ -239,16 +239,55 @@
     <% end %>
   </div>
 
-  <div id="inlinepdf-wrapper">
-    <div id="inlinepdf">
-      ! TODO INLINE PDF
-      <!-- <iframe id="inlinePdfFrame" style="width: 100%; height: 500px;" src="https://www2.unil.ch/viatimages/pdfview/index.php?url=https://www2.unil.ch/viatimages/viatimages/pdf/emery1901_bn_klff2230_185_188.pdf"></iframe> -->
+  <% if @texte_associe && field_value(@item, @texte_associe).present? %>
+    <div id="inlinepdf-wrapper">
+      <div id="inlinepdf">
+            <div id="textesAuteurs">
+              <%= t(".viat-author-texts") %>
+              <span id="emplacementOuvrage" class="info">
+                <span><%= t(".viat-document") %>:</span>
+                <% if @texte_associe.value_for_item(@item).count > 1 %>
+                  <select id="sel_texte_associe">
+                    <%  @texte_associe.value_for_item(@item).each do |text| %>
+                      <% if field_value(text, text.item_type.find_field('pdf')).present? %>
+                        <option value="/<%= text.item_type.find_field('pdf').raw_value(text).fetch("path") %>">
+                          <% if field_value(text, text.item_type.find_field('titre-texte-auteur')).present? %>
+                            <%= field_value(text, text.item_type.find_field('titre-texte-auteur')) %>
+                          <% end %>
+                          <% if field_value(text, text.item_type.find_field('emplacement-ouvrage')).present? %>
+                            (<%= field_value(text, text.item_type.find_field('emplacement-ouvrage')) %>)
+                          <% end %>
+                        </option>
+                      <% end %>
+                    <% end %>
+                  </select>
+                <% else %>
+                  <%  @texte_associe.value_for_item(@item).each do |text| %>
+                    <% if field_value(text, text.item_type.find_field('emplacement-ouvrage')).present? %>
+                      <%= field_value(text, text.item_type.find_field('emplacement-ouvrage')) %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </span>
+              <span id="pdfLink">
+                <a href="/<%= @texte_associe.value_for_item(@item).first.item_type.find_field('pdf').raw_value(@texte_associe.value_for_item(@item).first).fetch("path") %>" target="_blank">
+                  <%= t(".viat-download-pdf") %>
+                </a>
+                <a href="/<%= @texte_associe.value_for_item(@item).first.item_type.find_field('pdf').raw_value(@texte_associe.value_for_item(@item).first).fetch("path") %>" download>
+                  <%= image_tag("pdf-icon") %>
+                </a>
+              </span>
+            </div>
+            <iframe id="inlinePdfFrame" src="/<%= @texte_associe.value_for_item(@item).first.item_type.find_field('pdf').raw_value(@texte_associe.value_for_item(@item).first).fetch("path") %>"></iframe>
+      </div>
     </div>
-  </div>
+  <% end %>
 
   <% if @chercheur && strip_tags(field_value(@item, @chercheur)).present? %>
-    <div id="chercheur">
-      <%= t(".viat-index-desc") %>: <%= field_value(@item, @chercheur) %>
+    <div id="chercheurWrapper">
+      <div id="chercheur">
+        <%= t(".viat-index-desc") %>: <%= field_value(@item, @chercheur) %>
+      </div>
     </div>
   <% end %>
 </div>
