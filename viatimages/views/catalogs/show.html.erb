@@ -45,10 +45,13 @@
         <div id="searchcorpus-dropdown">
           <select id="sel_corpus" name="sel_corpus" onchange="location = this.value;">
             <option value="/<%= @catalog.slug %>/<%= params[:locale] %>" selected="selected"><%= t(".viat-select-corpus") %></option>
-            <% if @domain_choice_set_items %>
+            <% if @corpus_type_items %>
               <% @corpus_type_items.each do | corpus | %>
                 <option value="<%= item_path(:catalog_slug => corpus.catalog, :item_type_slug => corpus.item_type, :locale => I18n.locale, :id => corpus) %>">
-                  <%= corpus.item_type.primary_text_field.raw_value(corpus).truncate(70) %>
+                  <%= corpus.get_value("title").truncate(70) %>
+                  <% if corpus.get_value("nbre-illustrations").present? %>
+                    (<%= corpus.get_value("nbre-illustrations") %>)
+                  <% end %>
                 </option>
               <% end %>
             <% end %>

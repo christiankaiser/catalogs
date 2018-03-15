@@ -75,11 +75,14 @@
   overflow: hidden;
 }
 
-#tagcloud .tag a,
-#tagcloud .tag a:hover,
-#tagcloud .tag a:focus {
+#tagcloud .tag a {
   color: #fff;
   text-decoration: none;
+}
+
+#tagcloud a:hover,
+#tagcloud .tag a:focus {
+  color: #ddd;
 }
 
 #tagcloud span {
@@ -101,15 +104,3 @@
 #tagcloud .small {
   font-size: 13px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
