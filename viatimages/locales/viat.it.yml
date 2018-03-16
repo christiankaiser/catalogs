@@ -57,3 +57,5 @@ it:
           viat-author-texts: "Testi dell'autore"
           viat-download-pdf: "Scarica il PDF"
           viat-document: "Documento"
+        other:
+          viat-view-more: "Vedi di più"
