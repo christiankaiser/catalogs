@@ -13,13 +13,11 @@
         <% if @advanced_search.item_types.many? %>
           <ul class="nav nav-tabs">
             <% @advanced_search.item_types.each do |type| %>
-              <% if type.slug == 'corpus' || type.slug == 'images' %>
               <%= content_tag(
                       :li,
                       :role => "presentation",
                       :class => ("active" if @advanced_search.item_type == type)) do %>
                 <%= link_to(t(".tab", :type => type.name), :type => type.slug) %>
-              <% end %>
               <% end %>
             <% end %>
           </ul>
