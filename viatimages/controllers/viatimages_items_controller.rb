@@ -73,6 +73,8 @@ class ViatimagesItemsController < ItemsController
           @texte_associe = field if field.slug == "texte-associe"
         end
 
+        @image_size = '400x400'
+
         # get all short name values from yes/no choice set
         choice_yn = Choice.where("uuid LIKE :query", query: "viati%-choiceset-ouinon-1")
         @yes = choice_yn.present? ? choice_yn.first.short_name_translations.values : Array.new

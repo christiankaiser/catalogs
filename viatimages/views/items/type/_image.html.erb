@@ -5,7 +5,7 @@
       <div>
         <div id="image-content">
           <% if @image && field_value(@item, @image).present? %>
-            <%= field_value(@item, @image) %>
+            <%= field_value(@item, @image, :size => @image_size) %>
           <% end %>
 
           <% if @texte_image && strip_tags(field_value(@item, @texte_image)).present? %>
