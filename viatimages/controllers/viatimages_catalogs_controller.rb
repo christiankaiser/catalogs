@@ -11,38 +11,41 @@ class ViatimagesCatalogsController < CatalogsController
     # Retrieve & sort the all the domains
     domain_choice_set = ChoiceSet.where(catalog_id: @catalog.id).where(name: 'Domaines')
     domain_choice_set_items = domain_choice_set.empty? ? nil : Choice.where(choice_set_id: domain_choice_set.ids.first).sorted
-    @domain_choice_set_items = Hash.new
+    @domain_choice_set_items = {}
     domain_choice_set_items.each do |domain|
       value_slug = [I18n.locale, domain.short_name].join("-")
       link = [I18n.locale, "images?domaine=#{value_slug}"].join("/")
       @domain_choice_set_items.store(domain, link)
     end
 
-    # Retrieve & sort the first 20 most used keywords
-    image_type_keyword_field = image_type.present? ? image_type.first.find_field('keyword') : nil
-    image_type_items_with_keywords = image_type_keyword_field.present? ? Item.where(item_type_id: image_type.ids.first).where("data ->> '#{image_type_keyword_field.uuid}' != '[]'") : Array.new
-    keywords = Array.new
+    # Retrieve the first 20 most used keywords
+    image_type_keyword_field = image_type.present? ? image_type.first.find_field('mot-cle') : nil
+    keywords_attribute = image_type_keyword_field.uuid
+    image_type_items_with_keywords = []
+    keywords = []
+    if image_type_keyword_field.present?
+      image_type_items_with_keywords = Item.select("data ->> '#{keywords_attribute}' as #{keywords_attribute}")
+          .where(item_type_id: image_type.ids.first)
+          .where("data ->> '#{keywords_attribute}' != '[]'")
+    end
+    keyword_type = ItemType.where(catalog_id: @catalog.id).where(slug: 'keywords')
     image_type_items_with_keywords.each do |a|
-      a.get_value('keyword').each do |b|
-        keywords.push(b.item_type.primary_text_field.raw_value(b))
+      keywords.concat(JSON.parse(a[keywords_attribute])) if a[keywords_attribute]
+    end
+    keywords = Hash[keywords.group_by(&:itself).map { |k, v| [k, v.count] }.to_h.sort_by { |_, v| v }.reverse].first(20).shuffle.to_h if keywords.any?
+    @keywords = {}
+    keywords.each do |keyword_id, count|
+      keyword = Item.where(item_type_id: keyword_type.first).where(id: keyword_id).first
+      if count >= 1200
+        @keywords.store(keyword, 'largest')
+      elsif count >= 500
+        @keywords.store(keyword, 'large')
+      elsif count >= 300
+        @keywords.store(keyword, 'medium')
+      else
+        @keywords.store(keyword, 'small')
       end
     end
-    # Count duplicates keywords
-    @keywords_count = keywords.inject({}) { |a,e| a[e] = (a[e] || 0) + 1; a }
-    # Sort keywords by count, keep first 20 and shuffle the array
-    @keywords_count = @keywords_count.sort_by(&:last).reverse!.first(20).shuffle
-    # Replace keyword count with css classes
-    @keywords_count = @keywords_count.map { |keyword, count|
-      if count >= 8
-        {keyword => 'largest'}
-      elsif count >= 4
-        {keyword => 'large'}
-      elsif count >= 2
-        {keyword => 'medium'}
-      else
-        {keyword => 'small'}
-      end
-    }.reduce(:merge)
     @keywords_base_url = [I18n.locale, "search?utf8=✓&type=images&q="].join("/")
   end
 end

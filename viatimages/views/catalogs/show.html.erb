@@ -57,11 +57,11 @@
       </div>
 
       <div id="tagcloud">
-        <% if @keywords_count %>
-          <% @keywords_count.each do | keyword, style | %>
+        <% if @keywords %>
+          <% @keywords.each do | keyword, style | %>
             <span class="tag <%= style %>">
-              <a href="<%= @keywords_base_url + keyword%>">
-                <%= keyword %>
+              <a href="<%= @keywords_base_url + field_value(keyword, keyword.item_type.find_field("keyword"))%>">
+                <%= field_value(keyword, keyword.item_type.find_field("keyword")) %>
               </a>
             </span>
           <% end %>
