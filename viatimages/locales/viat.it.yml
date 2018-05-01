@@ -36,8 +36,8 @@ it:
       type:
         corpus:
           viat-catalog-record: "Scheda catalogo biblioteca"
-          viat-publisher: "Editore"
           viat-online-book-collection: "Libro o collezione online"
+          viat-consult: "Consulta"
           viat-description: "Descrizione"
           viat-title-images: "%{images_count} immagini per il libro: «%{corpus_title}»"
           viat-view-more: "Vedi di più"

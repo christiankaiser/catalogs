@@ -11,13 +11,23 @@
     <h4 id="titreOuvrageLong"><%= field_value(@item, @title_long) %></h4>
   <% end %>
 
-  <p id="corpus-persos">
-    Personnes associées ?
-  </p>
+  <div id="corpus-persos">
+    <% @personne_associee.value_for_item(@item).each do |personne| %>
+      <%= item_list_view(personne, :strip_p => true) %>
+      <% if strip_tags(field_value(personne, personne.item_type.find_field('date-naissance-mort'))).present? %>
+        (<%= field_value(personne, personne.item_type.find_field('date-naissance-mort')) %>)
+      <% end %>
+      <% if personne != @personne_associee.value_for_item(@item).last %>
+        <br>
+      <% end %>
+    <% end %>
+  </div>
 
   <div id="corpus-details">
     <p class="corpusInfo">
-      <span><%= t(".viat-publisher") %>:</span> ?<br>
+      <% if @editeur && strip_tags(field_value(@item, @editeur)).present? %>
+        <span><%= @editeur.label %>:</span> <%= field_value(@item, @editeur) %><br>
+      <% end %>
       <% if @date_edition && strip_tags(field_value(@item, @date_edition)).present? %>
         <span><%= @date_edition.label %>:</span> <%= field_value(@item, @date_edition) %><br>
       <% end %>
@@ -39,13 +49,22 @@
       <% end %>
     </p>
 
-    <p class="corpusInfo">
-      <span><%= t(".viat-online-book-collection") %>:&nbsp;</span> ?
-    </p>
+    <% if @textes_online && strip_tags(field_value(@item, @textes_online)).present? %>
+      <p class="corpusInfo">
+        <span><%= t(".viat-online-book-collection") %>:</span>
+        <% @textes_online.value_for_item(@item).each do |texte| %>
+          <a href="<%= texte.item_type.primary_field.raw_value(texte) %>" target="_blank">
+            <%= field_value(texte, texte.item_type.find_field('titre')) ? field_value(texte, texte.item_type.find_field('titre')) : t(".viat-consult") %>
+          </a>
+        <% end %>
+      </p>
+    <% end %>
 
     <p class="corpusInfo">
       <span><%= t(".viat-description") %>:</span><br>
-      ?
+      <% if @format && strip_tags(field_value(@item, @format)).present? %>
+        <%= field_value(@item, @format) %>
+      <% end %>
       <% if @tome_volume && strip_tags(field_value(@item, @tome_volume)).present? %>
         - <%= field_value(@item, @tome_volume) %> Tome(s)/Volume(s)
       <% end %>
@@ -62,7 +81,7 @@
         - <%= @cote.label %>: <%= field_value(@item, @cote) %>
       <% end %>
       <% if @url_catalogue && strip_tags(field_value(@item, @url_catalogue)).present? %>
-        - <a href="http://<%= strip_tags(field_value(@item, @url_catalogue)) %>" target="_blank" title="<%= t(".viat-catalog-record") %>"><%= t(".viat-catalog-record") %></a>
+        - <a href="<%= @url_catalogue.raw_value(@item) %>" target="_blank" title="<%= t(".viat-catalog-record") %>"><%= t(".viat-catalog-record") %></a>
       <% end %>
     </p>
 
@@ -94,13 +113,15 @@
 </div>
 
 <% fields_and_item_references(@item) do |field, browse| %>
-  <%= render_item_list(browse) %>
-  <% if browse.more? %>
-    <%= link_to(items_path(
-                    :item_type_slug => browse.item_type,
-                    browse.field.slug => browse.value
-                )) do %>
-      <%= t(".viat-view-more") %>
+  <% if browse.item_type.slug === 'images' %>
+    <%= render_item_list(browse) %>
+    <% if browse.more? %>
+      <%= link_to(items_path(
+                      :item_type_slug => browse.item_type,
+                      browse.field.slug => browse.value
+                  )) do %>
+        <%= t(".viat-view-more") %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>
