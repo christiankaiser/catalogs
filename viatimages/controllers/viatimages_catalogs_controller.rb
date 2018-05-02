@@ -2,7 +2,7 @@ class ViatimagesCatalogsController < CatalogsController
   def show
     image_type = ItemType.where(catalog_id: @catalog.id).where(slug: 'images')
 
-    # Retrieve & sort the all the corpuses
+    # Retrieve & sort the all the corpus
     corpus_type = ItemType.where(catalog_id: @catalog.id).where(slug: 'corpus')
     @corpus_type_items = nil if corpus_type.empty?
     corpus_title_field = corpus_type.first.find_field('title')
