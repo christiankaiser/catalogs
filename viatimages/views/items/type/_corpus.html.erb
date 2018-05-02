@@ -13,10 +13,7 @@
 
   <div id="corpus-persos">
     <% @personne_associee.value_for_item(@item).each do |personne| %>
-      <%= item_list_view(personne, :strip_p => true) %>
-      <% if strip_tags(field_value(personne, personne.item_type.find_field('date-naissance-mort'))).present? %>
-        (<%= field_value(personne, personne.item_type.find_field('date-naissance-mort')) %>)
-      <% end %>
+      <%= render "items/type/shared/associated_person", :person => personne %>
       <% if personne != @personne_associee.value_for_item(@item).last %>
         <br>
       <% end %>

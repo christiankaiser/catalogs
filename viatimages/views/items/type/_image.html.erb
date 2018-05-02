@@ -20,6 +20,13 @@
               </div>
             </div>
           <% end %>
+
+          <% if @corpus && strip_tags(field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('etablissement'))).present? %>
+            <div class="hidden" id="imageLegendEtablissment"><%= field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('etablissement')) %></div>
+          <% end %>
+          <% if @corpus && strip_tags(field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('droit-utilisation'))).present? %>
+            <div class="hidden" id="imageLegendDroits"><%= field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('droit-utilisation')) %></div>
+          <% end %>
         </div>
 
         <% if @image_id && strip_tags(field_value(@item, @image_id)).present? %>
@@ -49,7 +56,12 @@
         <div id="details-top">
           <% if @illustrateurs && strip_tags(field_value(@item, @illustrateurs)).present? %>
             <p class="info"><span><%= t(".viat-illustrators") %></span><br>
-              <%= field_value(@item, @illustrateurs) %>
+              <% @illustrateurs.value_for_item(@item).each do |illustrateur| %>
+                <%= render "items/type/shared/associated_person", :person => illustrateur %>
+                <% if illustrateur != @illustrateurs.value_for_item(@item).last %>
+                  <br>
+                <% end %>
+              <% end %>
             </p>
           <% end %>
 
@@ -251,21 +263,14 @@
                     <%  @texte_associe.value_for_item(@item).each do |text| %>
                       <% if field_value(text, text.item_type.find_field('pdf')).present? %>
                         <option value="/<%= text.item_type.find_field('pdf').raw_value(text).fetch("path") %>">
-                          <% if field_value(text, text.item_type.find_field('titre-texte-auteur')).present? %>
-                            <%= field_value(text, text.item_type.find_field('titre-texte-auteur')) %>
-                          <% end %>
-                          <% if field_value(text, text.item_type.find_field('emplacement-ouvrage')).present? %>
-                            (<%= field_value(text, text.item_type.find_field('emplacement-ouvrage')) %>)
-                          <% end %>
+                          <%= render "items/type/shared/associated_text", :text => text %>
                         </option>
                       <% end %>
                     <% end %>
                   </select>
                 <% else %>
                   <%  @texte_associe.value_for_item(@item).each do |text| %>
-                    <% if field_value(text, text.item_type.find_field('emplacement-ouvrage')).present? %>
-                      <%= field_value(text, text.item_type.find_field('emplacement-ouvrage')) %>
-                    <% end %>
+                    <%= render "items/type/shared/associated_text", :text => text %>
                   <% end %>
                 <% end %>
               </span>
