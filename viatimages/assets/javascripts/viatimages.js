@@ -63,13 +63,18 @@ $( document ).ready(function() {
     });
 
     replaceLineBreakBy($("#caracteristiquesGenerales"), ', ');
+    replaceLineBreakBy($("#ouvrageSource"), ', ');
+    replaceLineBreakBy($("#etablissementImage"), ', ');
+    replaceLineBreakBy($("#chercheur"), ', ');
+    replaceLineBreakBy($("#etablissementCorpus"), ' - ');
     replaceLineBreakBy($("#caracteristiquesEmplacement"), ' - ');
 });
 
 function replaceLineBreakBy(selector, replaceBy) {
-    if (selector.text().trim()) {
-        var str = selector.text().trim().replace(/[\t\n]+/g, replaceBy);
-        selector.text(str);
+    if (selector.html() == null) { return false; }
+    if (selector.html().trim()) {
+        var str = selector.html().trim().replace(/[\t\n]+/g, replaceBy);
+        selector.html(str);
     }
 }
 

@@ -55,7 +55,8 @@
 
         <div id="details-top">
           <% if @illustrateurs && strip_tags(field_value(@item, @illustrateurs)).present? %>
-            <p class="info"><span><%= t(".viat-illustrators") %></span><br>
+            <p class="info">
+              <span><%= t(".viat-illustrators") %></span><br>
               <% @illustrateurs.value_for_item(@item).each do |illustrateur| %>
                 <%= render "items/type/shared/associated_person", :person => illustrateur %>
                 <% if illustrateur != @illustrateurs.value_for_item(@item).last %>
@@ -66,22 +67,34 @@
           <% end %>
 
           <% if @corpus && strip_tags(field_value(@item, @corpus)).present? %>
-            <p class="info"><span><%= t(".viat-original-source") %></span><br>
-              <%= field_value(@item, @corpus) %><% if @corpus && strip_tags(field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('date-edition'))).present? %>, <%= field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('date-edition')) %><% end %><% if @corpus && strip_tags(field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('nbre-illustrations'))).present? %>, <%= field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('nbre-illustrations')) %> illustrations<% end %>
-            </p>
+            <div class="info">
+              <span><%= t(".viat-original-source") %></span>
+              <div id="ouvrageSource">
+                <%= field_value(@item, @corpus) %>
+                <% if @corpus && strip_tags(field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('date-edition'))).present? %>
+                  <%= field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('date-edition')) %>
+                <% end %>
+                <% if @corpus && strip_tags(field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('nbre-illustrations'))).present? %>
+                  <%= field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('nbre-illustrations')) %> illustrations
+                <% end %>
+              </div>
+            </div>
           <% end %>
 
           <% if @corpus && strip_tags(field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('etablissement'))).present? %>
-            <p class="info">
-              <%= field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('etablissement')) %><% if @corpus && strip_tags(field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('cote'))).present? %>, cote: <%= field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('cote')) %>
+            <div id="etablissementImage" class="info">
+              <%= field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('etablissement')) %>
+              <% if @corpus && strip_tags(field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('cote'))).present? %>
+                cote: <%= field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('cote')) %>
               <% end %>
-            </p>
+            </div>
           <% end %>
 
           <% if @description && strip_tags(field_value(@item, @description)).present? %>
-            <p class="info"><span><%= @description.label %></span><br>
+            <div class="info">
+              <span><%= @description.label %></span><br>
               <%= field_value(@item, @description) %>
-            </p>
+            </div>
           <% end %>
 
           <p class="info">
@@ -255,36 +268,40 @@
   <% if @texte_associe && field_value(@item, @texte_associe).present? %>
     <div id="inlinepdf-wrapper">
       <div id="inlinepdf">
-            <div id="textesAuteurs">
-              <%= t(".viat-author-texts") %>
-              <span id="emplacementOuvrage" class="info">
-                <span><%= t(".viat-document") %>:</span>
-                <% if @texte_associe.value_for_item(@item).count > 1 %>
-                  <select id="sel_texte_associe">
-                    <%  @texte_associe.value_for_item(@item).each do |text| %>
-                      <% if field_value(text, text.item_type.find_field('pdf')).present? %>
-                        <option value="/<%= text.item_type.find_field('pdf').raw_value(text).fetch("path") %>">
-                          <%= render "items/type/shared/associated_text", :text => text %>
-                        </option>
-                      <% end %>
-                    <% end %>
-                  </select>
-                <% else %>
-                  <%  @texte_associe.value_for_item(@item).each do |text| %>
-                    <%= render "items/type/shared/associated_text", :text => text %>
+        <div id="textesAuteurs">
+          <%= t(".viat-author-texts") %>
+          <span id="emplacementOuvrage" class="info">
+            <span><%= t(".viat-document") %>:</span>
+            <% if @texte_associe.value_for_item(@item).count > 1 %>
+              <select id="sel_texte_associe">
+                <%  @texte_associe.value_for_item(@item).each do |text| %>
+                  <% if field_value(text, text.item_type.find_field('pdf')).present? %>
+                    <option value="/<%= text.item_type.find_field('pdf').raw_value(text).fetch("path") %>">
+                      <%= render "items/type/shared/associated_text", :text => text %>
+                    </option>
                   <% end %>
                 <% end %>
-              </span>
-              <span id="pdfLink">
-                <a href="/<%= @texte_associe.value_for_item(@item).first.item_type.find_field('pdf').raw_value(@texte_associe.value_for_item(@item).first).fetch("path") %>" target="_blank">
-                  <%= t(".viat-download-pdf") %>
-                </a>
-                <a href="/<%= @texte_associe.value_for_item(@item).first.item_type.find_field('pdf').raw_value(@texte_associe.value_for_item(@item).first).fetch("path") %>" download>
-                  <%= image_tag("pdf-icon") %>
-                </a>
-              </span>
-            </div>
-            <iframe id="inlinePdfFrame" src="/<%= @texte_associe.value_for_item(@item).first.item_type.find_field('pdf').raw_value(@texte_associe.value_for_item(@item).first).fetch("path") %>"></iframe>
+              </select>
+            <% else %>
+              <%  @texte_associe.value_for_item(@item).each do |text| %>
+                <%= render "items/type/shared/associated_text", :text => text %>
+              <% end %>
+            <% end %>
+          </span>
+          <% if @texte_associe.value_for_item(@item).first.item_type.find_field('pdf').raw_value(@texte_associe.value_for_item(@item).first).present? %>
+            <span id="pdfLink">
+              <a href="/<%= @texte_associe.value_for_item(@item).first.item_type.find_field('pdf').raw_value(@texte_associe.value_for_item(@item).first).fetch("path") %>" target="_blank">
+                <%= t(".viat-download-pdf") %>
+              </a>
+              <a href="/<%= @texte_associe.value_for_item(@item).first.item_type.find_field('pdf').raw_value(@texte_associe.value_for_item(@item).first).fetch("path") %>" download>
+                <%= image_tag("pdf-icon") %>
+              </a>
+            </span>
+          <% end %>
+        </div>
+        <% if @texte_associe.value_for_item(@item).first.item_type.find_field('pdf').raw_value(@texte_associe.value_for_item(@item).first).present? %>
+          <iframe id="inlinePdfFrame" src="/<%= @texte_associe.value_for_item(@item).first.item_type.find_field('pdf').raw_value(@texte_associe.value_for_item(@item).first).fetch("path") %>"></iframe>
+        <% end %>
       </div>
     </div>
   <% end %>
@@ -292,7 +309,10 @@
   <% if @chercheur && strip_tags(field_value(@item, @chercheur)).present? %>
     <div id="chercheurWrapper">
       <div id="chercheur">
-        <%= t(".viat-index-desc") %>: <%= field_value(@item, @chercheur) %><% if strip_tags(field_value(@item.get_value(@chercheur), @item.get_value(@chercheur).item_type.find_field('etablissement'))).present? %>, <%= field_value(@item.get_value(@chercheur), @item.get_value(@chercheur).item_type.find_field('etablissement')) %><% end %>
+        <%= t(".viat-index-desc") %>: <%= field_value(@item, @chercheur) %>
+        <% if strip_tags(field_value(@item.get_value(@chercheur), @item.get_value(@chercheur).item_type.find_field('etablissement'))).present? %>
+          <%= field_value(@item.get_value(@chercheur), @item.get_value(@chercheur).item_type.find_field('etablissement')) %>
+        <% end %>
       </div>
     </div>
   <% end %>
