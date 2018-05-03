@@ -66,6 +66,7 @@ $( document ).ready(function() {
     replaceLineBreakBy($("#ouvrageSource"), ', ');
     replaceLineBreakBy($("#etablissementImage"), ', ');
     replaceLineBreakBy($("#chercheur"), ', ');
+    replaceLineBreakBy($("#enLigne"), ', ');
     replaceLineBreakBy($("#etablissementCorpus"), ' - ');
     replaceLineBreakBy($("#caracteristiquesEmplacement"), ' - ');
 });
