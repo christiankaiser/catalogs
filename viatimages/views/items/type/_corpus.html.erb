@@ -61,12 +61,15 @@
       <span><%= t(".viat-description") %>:</span><br>
       <% if @format && strip_tags(field_value(@item, @format)).present? %>
         <%= field_value(@item, @format) %>
+        <% if @tome_volume && strip_tags(field_value(@item, @tome_volume)).present? %>
+          -
+        <% end %>
       <% end %>
       <% if @tome_volume && strip_tags(field_value(@item, @tome_volume)).present? %>
-        - <%= field_value(@item, @tome_volume) %> Tome(s)/Volume(s)
+        <%= field_value(@item, @tome_volume) %> Tome(s)/Volume(s)<% if @nbre_illustrations && strip_tags(field_value(@item, @nbre_illustrations)).present? %>, <% end %>
       <% end %>
       <% if @nbre_illustrations && strip_tags(field_value(@item, @nbre_illustrations)).present? %>
-      , <%= field_value(@item, @nbre_illustrations) %> illustration(s)
+        <%= field_value(@item, @nbre_illustrations) %> illustration(s)
       <% end %>
 
       <br>

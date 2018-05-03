@@ -30,6 +30,8 @@ fr:
         viat-no-results: "Aucun résultat pour l'instant"
         viat-search-results-message_html: "<b>%{count_delimited}</b> images"
   items:
+      index:
+        images-for-book: "images pour l'ouvrage"
       item_list_nav:
         back: "Retour à la page de résultats"
         viat-images: "Image %{current} de %{total}"

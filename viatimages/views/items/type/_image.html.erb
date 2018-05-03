@@ -67,13 +67,14 @@
 
           <% if @corpus && strip_tags(field_value(@item, @corpus)).present? %>
             <p class="info"><span><%= t(".viat-original-source") %></span><br>
-              <%= field_value(@item, @corpus) %>
+              <%= field_value(@item, @corpus) %><% if @corpus && strip_tags(field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('date-edition'))).present? %>, <%= field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('date-edition')) %><% end %><% if @corpus && strip_tags(field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('nbre-illustrations'))).present? %>, <%= field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('nbre-illustrations')) %> illustrations<% end %>
             </p>
           <% end %>
 
-          <% if @corpus && strip_tags(field_value(@item.get_value('corpus'), @item.get_value('corpus').item_type.find_field('etablissement'))).present? %>
+          <% if @corpus && strip_tags(field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('etablissement'))).present? %>
             <p class="info">
-              <%= field_value(@item.get_value('corpus'), @item.get_value('corpus').item_type.find_field('etablissement')) %>
+              <%= field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('etablissement')) %><% if @corpus && strip_tags(field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('cote'))).present? %>, cote: <%= field_value(@item.get_value(@corpus), @item.get_value(@corpus).item_type.find_field('cote')) %>
+              <% end %>
             </p>
           <% end %>
 
@@ -96,17 +97,17 @@
                   <div id="caracteristiquesGenerales" class="info">
                     <%= strip_tags(field_value(@item, @critere_technique)) if @critere_technique && strip_tags(field_value(@item, @critere_technique)).present? %>
                     <% if @illustration_composee && strip_tags(field_value(@item, @illustration_composee)).present? %>
-                      <% if @yes.include? strip_tags(field_value(@item, @illustration_composee)) %>
+                      <% if @yes === strip_tags(field_value(@item, @illustration_composee)) %>
                         <%= @illustration_composee.label %>
                       <% end %>
                     <% end %>
                     <% if @planche_depliante && strip_tags(field_value(@item, @planche_depliante)).present? %>
-                      <% if @yes.include? strip_tags(field_value(@item, @planche_depliante)) %>
+                      <% if @yes === strip_tags(field_value(@item, @planche_depliante)) %>
                         <%= @planche_depliante.label %>
                       <% end %>
                     <% end %>
                     <% if @en_couleur && strip_tags(field_value(@item, @en_couleur)).present? %>
-                      <% if @yes.include? strip_tags(field_value(@item, @en_couleur)) %>
+                      <% if @yes === strip_tags(field_value(@item, @en_couleur)) %>
                         <%= @en_couleur.label %>
                       <% end %>
                     <% end %>
@@ -291,7 +292,7 @@
   <% if @chercheur && strip_tags(field_value(@item, @chercheur)).present? %>
     <div id="chercheurWrapper">
       <div id="chercheur">
-        <%= t(".viat-index-desc") %>: <%= field_value(@item, @chercheur) %>
+        <%= t(".viat-index-desc") %>: <%= field_value(@item, @chercheur) %><% if strip_tags(field_value(@item.get_value(@chercheur), @item.get_value(@chercheur).item_type.find_field('etablissement'))).present? %>, <%= field_value(@item.get_value(@chercheur), @item.get_value(@chercheur).item_type.find_field('etablissement')) %><% end %>
       </div>
     </div>
   <% end %>
