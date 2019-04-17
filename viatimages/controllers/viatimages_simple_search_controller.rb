@@ -1,5 +1,5 @@
-class ViatimagesSimpleSearchController < SimpleSearchController
-  def index
+class ViatimagesSimpleSearchesController < SimpleSearchesController
+  def show
     super
   end
 end
